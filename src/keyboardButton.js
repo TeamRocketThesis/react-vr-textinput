@@ -26,8 +26,8 @@ class KeyboardButton extends Component {
   render() {
     return (
       <VrButton onClick={this.props.clickHandler.bind(this, this.props.value)} style={styles.button}>
-          <Text style={styles.text}>{this.props.value}</Text>
-        </VrButton>  
+        <Text style={styles.text}>{this.props.value}</Text>
+      </VrButton>  
     );
   }
 }
