@@ -3,6 +3,27 @@ import { View, VrButton, StyleSheet, Text } from 'react-vr';
 import KeyboardButton from './keyboardButton';
 import layout from './layout';
 
+var styles = StyleSheet.create({
+  container : {
+
+  },
+  numbers : {
+
+  },
+  row1 : {
+
+  },
+  row2 : {
+
+  },
+  row3 : {
+
+  },
+  bottom : {
+    
+  }
+})
+
 class Keyboard extends Component {
   constructor(props) {
     super(props);
@@ -30,10 +51,17 @@ handleAllValues(value) {
 
 handleDelete() {
  
-  this.setState({
-    textString: this.state.textString.splice(this.state.cursorPosition - 1, 1),
-    cursorPosition: this.state.cursorPosition - 1
-  });
+  if (this.state.cursorPosition === this.state.textString.length + 1) {
+    this.setState({
+      textString: this.state.textString.slice(0,this.state.cursorPosition - 1),
+      cursorPosition: this.state.cursorPosition - 1
+    });
+  } else {
+    this.setState({
+      textString: this.state.textString.slice(0, this.state.cursorPosition - 1) + this.state.textString.slice(this.state.cursorPosition),
+      cursorPosition: this.state.cursorPosition
+    });
+  }
   
 }
 
@@ -98,7 +126,7 @@ getLayout () {
         <KeyboardButton value={''} clickHandler={this.handleSpacebar.bind(this)} isDisabled={false} />
         <KeyboardButton value={'Submit'} clickHandler={this.handleSubmit.bind(this)} isDisabled={false} />
       </View>
-      </View>
+    </View>
     );
   }
 }
