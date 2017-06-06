@@ -13,7 +13,54 @@ class Keyboard extends Component {
       isSymbolSelected: false
     } 
   }
+
+handleAllValues(value) {
+  if(this.state.cursorPosition === this.state.textString.length + 1) {
+    this.setState({
+      textString: this.state.textString + value,
+      cursorPosition: this.state.cursorPosition + 1
+    });
+  } else {
+    this.setState({
+      textString: this.state.textString.splice(this.state.cursorPosition, 0, value),
+      cursorPosition: this.state.cursorPosition + 1
+    });
+  }
+}
+
+handleDelete() {
+ 
+  this.setState({
+    textString: this.state.textString.splice(this.state.cursorPosition - 1, 1),
+    cursorPosition: this.state.cursorPosition - 1
+  });
   
+}
+
+handleShift() {
+
+}
+
+handleSymbolSelector() {
+
+}
+
+handleBack() {
+
+}
+
+handleForward() {
+
+}
+
+handleSpacebar() {
+
+}
+
+handleSubmit() {
+
+}
+
 getLayout () {
   if(this.state.isSymbolSelected) return layout.symbol.layout; 
   else {
@@ -43,7 +90,7 @@ getLayout () {
       <View>
         <KeyboardButton value={'Shift'} clickHandler={this.handleShift.bind(this)} isDisabled={this.state.isShiftSelected}/>
         {layoutArray[2].map((value) => <KeyboardButton value={value} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
-        <KeyboardButton value={this.state.isSymbolSelected ? layout.alphabet.displayValue : layout.symbol.displayValue} clickHandler={this.symbolSelector.bind(this)} isDisabled={false} />
+        <KeyboardButton value={this.state.isSymbolSelected ? layout.alphabet.displayValue : layout.symbol.displayValue} clickHandler={this.handleSymbolSelector.bind(this)} isDisabled={false} />
       </View>
       <View>
         <KeyboardButton value={'Back'} clickHandler={this.handleBack.bind(this)} isDisabled={false} />
