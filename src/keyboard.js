@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { View, VrButton, StyleSheet, Text } from 'react-vr';
 import KeyboardButton from './keyboardButton';
-<<<<<<< HEAD
+
 import layout from './layout';
 
-=======
->>>>>>> working on vrbutton for keyboard
 class Keyboard extends Component {
   constructor(props) {
     super(props);
