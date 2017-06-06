@@ -3,24 +3,22 @@ import { View, VrButton, StyleSheet, Text } from 'react-vr';
 
 var styles = StyleSheet.create({
   text: {
-    fontSize: 0.075,
+    fontSize: 0.04,
     textAlign: 'center',
     color: '#ffffff',
-    opacity: 3
+    opacity: 3,
+    fontFamily: "HelveticaNeue-Light", 
+    fontWeight: 'normal',
   },
   button: {
+    height: 0.15,
     padding: 0.05,
-    borderStyle: 'solid',
-    borderColor: 'white',
     borderWidth: 0.005,
     flex: 1,
-    transform: [{translate: [-.5,0,-2]}],
-    backgroundColor: 'black',
-    color: 'white',
+    transform: [{translate: [-1,0,-1.5]}],
+    backgroundColor: '#0d0d0d',
     alignItems: 'center',
-    textAlign: 'center',
-    fontSize: 0.2,
-    opacity: .7
+    opacity: 0.5,
   }
 })
 
