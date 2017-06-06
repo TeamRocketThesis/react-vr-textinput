@@ -5,18 +5,19 @@ var styles = StyleSheet.create({
   text: {
     fontSize: 0.075,
     textAlign: 'center',
-    color: '#f5f5f5',
-    opacity: 1
+    color: '#ffffff',
+    opacity: 3
   },
   button: {
     padding: 0.05,
     borderStyle: 'solid',
     borderColor: 'white',
+    borderWidth: 0.002,
     flex: 1,
     flexDirection: 'column',
     transform: [{translate: [0,0,-2]}],
     backgroundColor: 'black',
-    opacity: .65,
+    opacity: .7,
   }
 })
 
@@ -24,7 +25,7 @@ class KeyboardButton extends Component {
   render() {
     return (
         <VrButton style={styles.button}>
-        <Text style={styles.text}>A</Text>
+        <Text style={styles.text}>{this.props.value}</Text>
         </VrButton>  
     );
   }
