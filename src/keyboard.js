@@ -66,11 +66,15 @@ handleDelete() {
 }
 
 handleShift() {
-
+  this.setState({
+    isShiftSelected: !this.state.isShiftSelected
+  });
 }
 
 handleSymbolSelector() {
-
+  this.setState({
+    isSymbolSelected: !this.state.isSymbolSelected
+  });
 }
 
 handleBack() {
