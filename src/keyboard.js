@@ -4,6 +4,7 @@ import KeyboardButton from './keyboardButton';
 
 import layout from './layout';
 
+<<<<<<< HEAD
 var styles = StyleSheet.create({
   container : {
 
@@ -27,6 +28,8 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
   }
 })
+=======
+>>>>>>> blah
 
 class Keyboard extends Component {
   constructor(props) {
