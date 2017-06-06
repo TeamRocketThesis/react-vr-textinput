@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-vr';
 
-export default class temp extends React.Component {
+export default class Example extends React.Component {
   render() {
     return (
       <View>
@@ -31,4 +31,4 @@ export default class temp extends React.Component {
   }
 };
 
-AppRegistry.registerComponent('temp', () => temp);
+AppRegistry.registerComponent('Example', () => Example);

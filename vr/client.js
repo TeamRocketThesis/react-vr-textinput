@@ -6,7 +6,7 @@
 import {VRInstance} from 'react-vr-web';
 
 function init(bundle, parent, options) {
-  const vr = new VRInstance(bundle, 'temp', parent, {
+  const vr = new VRInstance(bundle, 'Example', parent, {
     // Add custom options here
     ...options,
   });
