@@ -4,6 +4,7 @@ import KeyboardButton from './keyboardButton';
 
 import layout from './layout';
 
+<<<<<<< HEAD
 var styles = StyleSheet.create({
   container : {
 
@@ -35,6 +36,8 @@ var styles = StyleSheet.create({
 >>>>>>> keyboard layout alright
   }
 })
+=======
+>>>>>>> blah
 
 
 class Keyboard extends Component {
