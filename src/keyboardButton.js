@@ -28,9 +28,8 @@ var styles = StyleSheet.create({
 class KeyboardButton extends Component {
   render() {
     return (
-
-        <VrButton style={styles.button}>
-        <Text style={styles.text}>{this.props.value}</Text>
+      <VrButton onClick={this.props.clickHandler.bind(this, this.props.value)} style={styles.button}>
+          <Text style={styles.text}>{this.props.value}</Text>
         </VrButton>  
     );
   }
