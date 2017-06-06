@@ -20,7 +20,7 @@ var styles = StyleSheet.create({
     color: 'white',
     alignItems: 'center',
     textAlign: 'center',
-    fontSize = 0.2,
+    fontSize: 0.2,
     opacity: .7
   }
 })
