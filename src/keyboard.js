@@ -13,7 +13,39 @@ class Keyboard extends Component {
       isSymbolSelected: false
     } 
   }
-  
+
+handleAllValues(value) {
+
+}
+
+handleDelete() {
+
+}
+
+handleShift() {
+
+}
+
+handleSymbolSelector() {
+
+}
+
+handleBack() {
+
+}
+
+handleForward() {
+
+}
+
+handleSpacebar() {
+
+}
+
+handleSubmit() {
+
+}
+
 getLayout () {
   if(this.state.isSymbolSelected) return layout.symbol.layout; 
   else {
@@ -43,7 +75,7 @@ getLayout () {
       <View>
         <KeyboardButton value={'Shift'} clickHandler={this.handleShift.bind(this)} isDisabled={this.state.isShiftSelected}/>
         {layoutArray[2].map((value) => <KeyboardButton value={value} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
-        <KeyboardButton value={this.state.isSymbolSelected ? layout.alphabet.displayValue : layout.symbol.displayValue} clickHandler={this.symbolSelector.bind(this)} isDisabled={false} />
+        <KeyboardButton value={this.state.isSymbolSelected ? layout.alphabet.displayValue : layout.symbol.displayValue} clickHandler={this.handleSymbolSelector.bind(this)} isDisabled={false} />
       </View>
       <View>
         <KeyboardButton value={'Back'} clickHandler={this.handleBack.bind(this)} isDisabled={false} />
