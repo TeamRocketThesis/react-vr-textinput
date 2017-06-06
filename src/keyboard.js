@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, VrButton, StyleSheet, Text } from 'react-vr';
 import KeyboardButton from './keyboardButton';
+
 import layout from './layout';
 
 var styles = StyleSheet.create({
@@ -131,6 +132,7 @@ getLayout () {
         <KeyboardButton value={'Submit'} clickHandler={this.handleSubmit.bind(this)} isDisabled={false} />
       </View>
     </View>
+
     );
   }
 }
