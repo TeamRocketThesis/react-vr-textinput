@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, VrButton, StyleSheet, Text } from 'react-vr';
 import KeyboardButton from './keyboardButton';
-<<<<<<< HEAD
+
 import layout from './layout';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 var styles = StyleSheet.create({
   container : {
@@ -30,6 +31,8 @@ var styles = StyleSheet.create({
 =======
 >>>>>>> working on vrbutton for keyboard
 >>>>>>> working on vrbutton for keyboard
+=======
+>>>>>>> fixed accessory stuff
 class Keyboard extends Component {
   constructor(props) {
     super(props);
