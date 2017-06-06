@@ -3,6 +3,27 @@ import { View, VrButton, StyleSheet, Text } from 'react-vr';
 import KeyboardButton from './keyboardButton';
 import layout from './layout';
 
+var styles = StyleSheet.create({
+  container : {
+
+  },
+  numbers : {
+
+  },
+  row1 : {
+
+  },
+  row2 : {
+
+  },
+  row3 : {
+
+  },
+  bottom : {
+    
+  }
+})
+
 class Keyboard extends Component {
   constructor(props) {
     super(props);
@@ -98,7 +119,7 @@ getLayout () {
         <KeyboardButton value={''} clickHandler={this.handleSpacebar.bind(this)} isDisabled={false} />
         <KeyboardButton value={'Submit'} clickHandler={this.handleSubmit.bind(this)} isDisabled={false} />
       </View>
-      </View>
+    </View>
     );
   }
 }
