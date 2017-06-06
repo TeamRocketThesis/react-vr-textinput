@@ -3,19 +3,23 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node -e \"console.log('open browser at http://localhost:8081/vr/\\n\\n');\" && node node_modules/react-native/local-cli/cli.js start",
+    "start": "node start.js",
     "bundle": "node node_modules/react-vr/scripts/bundle.js",
     "open": "node -e \"require('xopen')('http://localhost:8081/vr/')\"",
     "devtools": "react-devtools",
     "test": "jest"
   },
   "dependencies": {
+    "express": "^4.15.3",
+    "nodemon": "^1.11.0",
     "ovrui": "^1.1.0",
+    "path": "^0.12.7",
     "react": "~15.4.1",
     "react-native": "~0.42.0",
-    "three": "^0.80.1",
     "react-vr": "^1.1.0",
-    "react-vr-web": "^1.1.0"
+    "react-vr-web": "^1.1.0",
+    "shelljs": "^0.7.7",
+    "three": "^0.80.1"
   },
   "devDependencies": {
     "babel-jest": "^19.0.0",

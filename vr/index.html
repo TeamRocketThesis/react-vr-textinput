@@ -1,21 +1,29 @@
 <html>
   <head>
-    <title>temp</title>
+    <title>VrTextInput</title>
     <style>body { margin: 0; }</style>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   </head>
   <body>
     <!-- When you're ready to deploy your app, update this line to point to your compiled client.bundle.js -->
-    <script src="./client.bundle?platform=vr"></script>
+    <!--<script src="./client.bundle?platform=vr"></script>-->
+    <script src="./client.bundle.js"></script>
     <script>
-      // Initialize the React VR application
-      ReactVR.init(
-        // When you're ready to deploy your app, update this line to point to
-        // your compiled index.bundle.js
-        '../examples/index.vr.bundle?platform=vr&dev=true',
-        // Attach it to the body tag
-        document.body
-      );
+      
+      // ReactVR.init(
+      //   '../examples/index.vr.bundle?platform=vr&dev=true',
+      //   document.body
+      // );
+       ReactVR.init(
+          // When you're ready to deploy your app, update this line to point to
+          // your compiled index.bundle.js
+          '../index.bundle.js',
+          // Attach it to the body tag
+          document.body,
+          {
+            cursorVisibility: 'auto',
+          }
+       );
     </script>
   </body>
 </html>
