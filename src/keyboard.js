@@ -6,19 +6,14 @@ import layout from './layout';
 
 var styles = StyleSheet.create({
   container : {
-
   },
   numbers : {
-
   },
   row1 : {
-
   },
   row2 : {
-
   },
   row3 : {
-
   },
   bottom : {
     
@@ -26,7 +21,7 @@ var styles = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: 'row'
-  },
+  }
 })
 
 
