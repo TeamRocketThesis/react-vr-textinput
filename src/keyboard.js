@@ -42,6 +42,7 @@ class Keyboard extends Component {
   }
 
 handleAllValues(value) {
+  console.log("here", value);
   if(this.state.cursorPosition === this.state.textString.length + 1) {
     this.setState({
       textString: this.state.textString + value,
