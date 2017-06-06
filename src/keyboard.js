@@ -51,10 +51,17 @@ handleAllValues(value) {
 
 handleDelete() {
  
-  this.setState({
-    textString: this.state.textString.splice(this.state.cursorPosition - 1, 1),
-    cursorPosition: this.state.cursorPosition - 1
-  });
+  if (this.state.cursorPosition === this.state.textString.length + 1) {
+    this.setState({
+      textString: this.state.textString.slice(0,this.state.cursorPosition - 1),
+      cursorPosition: this.state.cursorPosition - 1
+    });
+  } else {
+    this.setState({
+      textString: this.state.textString.slice(0, this.state.cursorPosition - 1) + this.state.textString.slice(this.state.cursorPosition),
+      cursorPosition: this.state.cursorPosition
+    });
+  }
   
 }
 
