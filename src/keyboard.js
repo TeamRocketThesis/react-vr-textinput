@@ -96,11 +96,33 @@ handleForward() {
 }
 
 handleSpacebar() {
-
+  console.log("here", value);
+  if (this.state.cursorPosition === this.state.textString.length + 1) {
+    this.setState({
+      textString: this.state.textString + ' ',
+      cursorPosition: this.state.cursorPosition + 1
+    });
+  } else {
+    this.setState({
+      textString: this.state.textString.slice(0, this.state.cursorPosition) + ' ' + this.state.textString.slice(this.state.cursorPosition),
+      cursorPosition: this.state.cursorPosition + 1
+    });
+  }
 }
 
-handleSubmit() {
-
+handleReturn() {
+  console.log("here", value);
+  if (this.state.cursorPosition === this.state.textString.length + 1) {
+    this.setState({
+      textString: this.state.textString + '\n',
+      cursorPosition: this.state.cursorPosition + 1
+    });
+  } else {
+    this.setState({
+      textString: this.state.textString.slice(0, this.state.cursorPosition) + '\n' + this.state.textString.slice(this.state.cursorPosition),
+      cursorPosition: this.state.cursorPosition + 1
+    });
+  }
 }
 
 getLayout () {
@@ -138,7 +160,7 @@ getLayout () {
         <KeyboardButton value={'Back'} clickHandler={this.handleBack.bind(this)} isDisabled={false} />
         <KeyboardButton value={'Forward'} clickHandler={this.handleForward.bind(this)} isDisabled={false} />
         <KeyboardButton value={''} clickHandler={this.handleSpacebar.bind(this)} isDisabled={false} />
-        <KeyboardButton value={'Submit'} clickHandler={this.handleSubmit.bind(this)} isDisabled={false} />
+        <KeyboardButton value={'Return'} clickHandler={this.handleReturn.bind(this)} isDisabled={false} />
       </View>
     </View>
     );
