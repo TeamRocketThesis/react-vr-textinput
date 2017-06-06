@@ -30,6 +30,11 @@ handleAllValues(value) {
 
 handleDelete() {
  
+  this.setState({
+    textString: this.state.textString.splice(this.state.cursorPosition - 1, 1),
+    cursorPosition: this.state.cursorPosition - 1
+  });
+  
 }
 
 handleShift() {
