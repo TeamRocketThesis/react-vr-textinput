@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View, VrButton, StyleSheet, Text } from 'react-vr';
 import KeyboardButton from './keyboardButton';
+<<<<<<< HEAD
 import layout from './layout';
 
+<<<<<<< HEAD
 var styles = StyleSheet.create({
   container : {
 
@@ -24,6 +26,10 @@ var styles = StyleSheet.create({
   }
 })
 
+=======
+=======
+>>>>>>> working on vrbutton for keyboard
+>>>>>>> working on vrbutton for keyboard
 class Keyboard extends Component {
   constructor(props) {
     super(props);
@@ -109,6 +115,7 @@ getLayout () {
     numberArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
     return (
       <View>
+<<<<<<< HEAD
       <View>
         {numberArray.map((number) => <KeyboardButton value={number} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
         <KeyboardButton value={'Delete'} clickHandler={this.handleDelete.bind(this)} isDisabled={false} />
@@ -130,7 +137,14 @@ getLayout () {
         <KeyboardButton value={''} clickHandler={this.handleSpacebar.bind(this)} isDisabled={false} />
         <KeyboardButton value={'Submit'} clickHandler={this.handleSubmit.bind(this)} isDisabled={false} />
       </View>
+<<<<<<< HEAD
     </View>
+=======
+=======
+        <KeyboardButton />
+>>>>>>> working on vrbutton for keyboard
+      </View>
+>>>>>>> working on vrbutton for keyboard
     );
   }
 }
