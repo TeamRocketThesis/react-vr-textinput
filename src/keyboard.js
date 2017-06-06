@@ -15,11 +15,21 @@ class Keyboard extends Component {
   }
 
 handleAllValues(value) {
-
+  if(this.state.cursorPosition === this.state.textString.length + 1) {
+    this.setState({
+      textString: this.state.textString + value,
+      cursorPosition: this.state.cursorPosition + 1
+    });
+  } else {
+    this.setState({
+      textString: this.state.textString.splice(this.state.cursorPosition, 0, value),
+      cursorPosition: this.state.cursorPosition + 1
+    });
+  }
 }
 
 handleDelete() {
-
+ 
 }
 
 handleShift() {
