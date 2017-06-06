@@ -13,7 +13,6 @@ var styles = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: 'white',
     borderWidth: 0.005,
-    borderHeight: 0.005,
     flex: 1,
     transform: [{translate: [-.5,0,-2]}],
     backgroundColor: 'black',
