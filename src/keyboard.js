@@ -79,11 +79,19 @@ handleSymbolSelector() {
 }
 
 handleBack() {
-
+  if (!this.state.cursorPosition === 0) {
+    this.setState({
+      cursorPosition: this.state.cursorPosition - 1
+    });
+  }
 }
 
 handleForward() {
-
+  if (!this.state.cursorPosition === this.state.textString.length) {
+    this.setState({
+      cursorPosition: this.state.cursorPosition + 1
+    });
+  }
 }
 
 handleSpacebar() {
