@@ -8,7 +8,8 @@ class TextInput extends Component {
     super(props);
     this.state = {
       cursorPosition: '0',
-      textArray: ['*'],
+      textArrayCursorYes: ['*'],
+      textArrayCursorNo: [''],
       text: '',
       selected: false,
       rows: this.props.rows || 4,
@@ -20,22 +21,24 @@ class TextInput extends Component {
 
 generateText() {
   var string = '';
-  for(var i =0; i < this.state.textArray.length; i++) {
-    if(this.state.textArray[i] != '*') string += this.state.textArray[i];
+  for(var i =0; i < this.state.textArrayCursorYes.length; i++) {
+    if(this.state.textArrayCursorYes[i] != '*') string += this.state.textArrayCursorYes[i];
   }
   return string;
 }
 
 handleAllLetters(value) {
   this.setState({
-    textArray: this.state.textArray.splice(this.state.cursorPosition, 0, value),
+    textArrayCursorYes: this.state.textArrayCursorYes.splice(this.state.cursorPosition, 0, value),
+    textArrayCursorNo: this.state.textArrayCursorNo.splice(this.state.cursorPosition, 0, value),
     cursorPosition: this.state.cursorPosition + 1,
     text: this.generateText()
   });
 }
 
 handleDelete() {
-  
+  this.setState()
+
 }
 
 handleForward() {
@@ -61,6 +64,7 @@ handleDown() {
 paginate() {
 
 }
+
   render() {
 var array = this.paginate();
 if(array.length > rows) {
@@ -72,8 +76,16 @@ return(<View>
   <View> {/* this view might need to be a VR button to handle focus / defocus */}
     <Text>{/* Need a way of showing the correct section of our paginated text*/}</Text>
     </View>
-    <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
-    <Keyboard />
+
+    <Scroll handleUp={this.handleUp.bind(this)} 
+    handleDown={this.handleDown.bind(this)} />
+
+    <Keyboard handleSubmit={this.handleSubmit.bind(this)} 
+    handleAllLetters={this.handleAllLetters.bind(this)} 
+    handleDelete={this.handleDelete.bind(this)} 
+    handleForward={this.handleForward.bind(this)} 
+    handleBack={this.handleBack.bind(this)} />
+
 </View>);
 
   }
