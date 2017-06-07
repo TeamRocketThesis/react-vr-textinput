@@ -120,15 +120,16 @@ paginate(s) {
 //     showScroll: true
 //   });
 // }
-return(<View>
-  <View>
-    <View style={{ transform: [{ translate: [0, 0.2, -1.5] }] }}>
-      <Text>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
-    </View>
-    </View>
-    <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
-    <Keyboard handleSubmit={this.handleSubmit.bind(this)} handleAllLetters={this.handleAllLetters.bind(this)} handleDelete={this.handleDelete.bind(this)} handleForward={this.handleForward.bind(this)} handleBack={this.handleBack.bind(this)} />
-</View>);
+return(
+    <View>
+      <View style={{ transform: [{ translate: [0, 0.2, -2] }] }}>
+        <Text>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
+        <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
+      </View>
+      <View>
+        <Keyboard handleSubmit={this.handleSubmit.bind(this)} handleAllLetters={this.handleAllLetters.bind(this)} handleDelete={this.handleDelete.bind(this)} handleForward={this.handleForward.bind(this)} handleBack={this.handleBack.bind(this)} />
+      </View>
+    </View>);
   }
 }
 
