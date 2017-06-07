@@ -12,7 +12,8 @@ class TextInput extends Component {
       selected: false,
       rows: this.props.rows || 4,
       columns: this.props.cols || 50,
-      submitHandler: this.props.onSubmit || null
+      submitHandler: this.props.onSubmit || null,
+      showScroll
     }
   }
 
@@ -33,6 +34,14 @@ handleBack() {
 }
 
 handleSubmit() {
+
+}
+
+handleUp() {
+
+}
+
+handleDown() {
   
 }
 
@@ -41,13 +50,20 @@ paginate() {
 }
   render() {
 var array = this.paginate();
+if(array.length > rows) {
+  this.setState({
+    showScroll: true
+  });
+}
 return(<View>
-  <View> 
-    <Text></Text>
+  <View> {/* this view might need to be a VR button to handle focus / defocus */}
+    <Text>{/* Need a way of showing the correct section of our paginated text*/}</Text>
     </View>
-    <Scroll />
+    <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
     <Keyboard />
 </View>);
 
   }
 }
+
+export default TextInput;
