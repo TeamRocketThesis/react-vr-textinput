@@ -36,35 +36,35 @@ class Keyboard extends Component {
   }
 
 handleAllValues(value) {
-  if(this.state.cursorPosition === this.state.textString.length + 1) {
-    this.setState({
-      textString: this.state.textString + value,
-      cursorPosition: this.state.cursorPosition + 1
-    });
-  } else {
-    this.setState({
-      textString: this.state.textString.slice(0,this.state.cursorPosition) + value + this.state.textString.slice(this.state.cursorPosition),
-      cursorPosition: this.state.cursorPosition + 1
-    });
-  }
-  console.log(this.state.textString);
+  // if(this.state.cursorPosition === this.state.textString.length + 1) {
+  //   this.setState({
+  //     textString: this.state.textString + value,
+  //     cursorPosition: this.state.cursorPosition + 1
+  //   });
+  // } else {
+  //   this.setState({
+  //     textString: this.state.textString.slice(0,this.state.cursorPosition) + value + this.state.textString.slice(this.state.cursorPosition),
+  //     cursorPosition: this.state.cursorPosition + 1
+  //   });
+  // }
+  // console.log(this.state.textString);
+  this.props.handleAllLetters(value);
 }
 
 handleDelete() {
 
- 
-  if (this.state.cursorPosition === this.state.textString.length + 1) {
-    this.setState({
-      textString: this.state.textString.slice(0,this.state.cursorPosition - 1),
-      cursorPosition: this.state.cursorPosition - 1
-    });
-  } else {
-    this.setState({
-      textString: this.state.textString.slice(0, this.state.cursorPosition - 1) + this.state.textString.slice(this.state.cursorPosition),
-      cursorPosition: this.state.cursorPosition
-    });
-  }
-  
+  // if (this.state.cursorPosition === this.state.textString.length + 1) {
+  //   this.setState({
+  //     textString: this.state.textString.slice(0,this.state.cursorPosition - 1),
+  //     cursorPosition: this.state.cursorPosition - 1
+  //   });
+  // } else {
+  //   this.setState({
+  //     textString: this.state.textString.slice(0, this.state.cursorPosition - 1) + this.state.textString.slice(this.state.cursorPosition),
+  //     cursorPosition: this.state.cursorPosition
+  //   });
+  // }
+  this.props.handleDelete();
 }
 
 handleShift() {
@@ -83,19 +83,21 @@ handleSymbolSelector() {
 }
 
 handleBack() {
-  if (!this.state.cursorPosition === 0) {
-    this.setState({
-      cursorPosition: this.state.cursorPosition - 1
-    });
-  }
+  // if (!this.state.cursorPosition === 0) {
+  //   this.setState({
+  //     cursorPosition: this.state.cursorPosition - 1
+  //   });
+  // }
+  this.props.handleBack();
 }
 
 handleForward() {
-  if (!this.state.cursorPosition === this.state.textString.length) {
-    this.setState({
-      cursorPosition: this.state.cursorPosition + 1
-    });
-  }
+  // if (!this.state.cursorPosition === this.state.textString.length) {
+  //   this.setState({
+  //     cursorPosition: this.state.cursorPosition + 1
+  //   });
+  // }
+  this.props.handleForward();
 }
 
 handleSpacebar() {
