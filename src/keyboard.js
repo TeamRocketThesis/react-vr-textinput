@@ -51,6 +51,7 @@ handleAllValues(value) {
 }
 
 handleDelete() {
+
  
   if (this.state.cursorPosition === this.state.textString.length + 1) {
     this.setState({
@@ -67,7 +68,8 @@ handleDelete() {
 }
 
 handleShift() {
-  console.log('shift called');
+
+  
   this.setState({
     isShiftSelected: !this.state.isShiftSelected
   });
@@ -75,7 +77,8 @@ handleShift() {
 
 handleSymbolSelector() {
   this.setState({
-    isSymbolSelected: !this.state.isSymbolSelected
+    isSymbolSelected: !this.state.isSymbolSelected,
+    isShiftSelected: false
   });
 }
 
