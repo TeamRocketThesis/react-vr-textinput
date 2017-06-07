@@ -83,19 +83,21 @@ handleSymbolSelector() {
 }
 
 handleBack() {
-  if (!this.state.cursorPosition === 0) {
-    this.setState({
-      cursorPosition: this.state.cursorPosition - 1
-    });
-  }
+  // if (!this.state.cursorPosition === 0) {
+  //   this.setState({
+  //     cursorPosition: this.state.cursorPosition - 1
+  //   });
+  // }
+  this.props.handleBack();
 }
 
 handleForward() {
-  if (!this.state.cursorPosition === this.state.textString.length) {
-    this.setState({
-      cursorPosition: this.state.cursorPosition + 1
-    });
-  }
+  // if (!this.state.cursorPosition === this.state.textString.length) {
+  //   this.setState({
+  //     cursorPosition: this.state.cursorPosition + 1
+  //   });
+  // }
+  this.props.handleForward();
 }
 
 handleSpacebar() {
