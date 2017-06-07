@@ -31,8 +31,8 @@ class KeyboardButton extends Component {
     return (
       <VrButton 
       onClick={this.props.isDisabled === false ? this.props.clickHandler.bind(this, this.props.value) : null}
-      style={[styles.button, {backgroundColor: this.state.backgroundColor}]}
-      onEnter={() => this.setState({backgroundColor: 'red'})}
+      style={[styles.button, {backgroundColor: this.props.isDisabled === false? this.state.backgroundColor: 'red'}]}
+      onEnter={() => this.setState({backgroundColor: 'green'})}
       onExit={() => this.setState({backgroundColor: '#0d0d0d'})}
       >
         <Text style={styles.text}>{this.props.value}</Text>
