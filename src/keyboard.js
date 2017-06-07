@@ -145,7 +145,7 @@ getLayout () {
     return (
       <View>
       <View style={styles.row}>
-        {numberArray.map((number) => <KeyboardButton value={number} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
+        {numberArray.map((number) => <KeyboardButton this={this} value={number} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
         <KeyboardButton value={'Delete'} clickHandler={this.handleDelete.bind(this)} isDisabled={false} />
       </View>
       <View style={styles.row}>
