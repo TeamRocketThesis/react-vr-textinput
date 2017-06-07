@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, VrButton, StyleSheet, Text } from 'react-vr';
 import Keyboard from './keyboard';
+import Scroll from './scroll'
 
 class TextInput extends Component {
   constructor(props){
@@ -17,12 +18,24 @@ class TextInput extends Component {
     }
   }
 
-handleAllLetters(value) {
+generateText() {
+  var string = '';
+  for(var i =0; i < this.state.textArray.length; i++) {
+    if(this.state.textArray[i] != '*') string += this.state.textArray[i];
+  }
+  return string;
+}
 
+handleAllLetters(value) {
+  this.setState({
+    textArray: this.state.textArray.splice(this.state.cursorPosition, 0, value),
+    cursorPosition: this.state.cursorPosition + 1,
+    text: this.generateText()
+  });
 }
 
 handleDelete() {
-
+  
 }
 
 handleForward() {
@@ -42,7 +55,7 @@ handleUp() {
 }
 
 handleDown() {
-  
+
 }
 
 paginate() {
