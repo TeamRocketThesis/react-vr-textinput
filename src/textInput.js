@@ -17,10 +17,16 @@ class TextInput extends Component {
       submitHandler: this.props.onSubmit || null,
       showScroll: true,
       toggleCursor: true,
+<<<<<<< HEAD
       x: -2,
       y: 0.2,
       z: -2,
       pages: 0
+=======
+      pages: 0,
+      start: 0,
+      end: (this.props.rows || 4) * (this.props.cols || 50)
+>>>>>>> changing in progress
     }
   }
 
@@ -49,6 +55,7 @@ handleAllLetters(value) {
     cursorPosition: this.state.cursorPosition + 1,
     text: this.generateText()
   });
+  this.handleCursorFollow();
 }
 
 handleDelete() {
@@ -151,35 +158,96 @@ paginate(s) {
   return array;
 }
 
-  render() {
-    var arrayCursorYes = this.paginate(this.state.textArrayCursorYes);
-    var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
-    var displayString = '';
+  handleCursorFollow() {
 
-    if (arrayCursorYes.length <= this.state.rows) {
+    if (this.state.cursorPosition > this.state.end) {
+      var start = this.state.start;
+      var end = this.state.end;
+      while (end <= this.state.cursorPosition) {
+        start++;
+        end++;
+      }
+    } else if (this.state.cursorPosition < this.state.start) {
+      var start = this.state.start;
+      var end = this.state.end;
+      while (start >= this.state.cursorPosition) {
+        start--;
+        end--;
+      }
+    }
+
+    this.setState({
+      start: start,
+      end: end
+    }) 
+ 
+  }
+
+  render() {
+    // var arrayCursorYes = this.paginate(this.state.textArrayCursorYes);
+    // var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
+    // var displayString = '';
+
+    // if (this.state.cursorPosition > this.state.end) {
+    //   var start = this.state.start;
+    //   var end = this.state.end;
+    //   while (end <= this.state.cursorPosition) {
+    //     start++;
+    //     end++;
+    //   }
+    //   this.handleCursorFollow(start, end);
+
+    // } else if (this.state.cursorPosition < this.state.start) {
+    //   var start = this.state.start;
+    //   var end = this.state.end;
+    //   while (start >= this.state.cursorPosition) {
+    //     start--;
+    //     end--;
+    //   }
+    //   this.handleCursorFollow(start, end);
+  
+    // }
+    
+    // console.log('start',this.state.start)
+    // console.log('end',this.state.end)
+    var displayString = '';
+    var displayArray = this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end ));
+    // console.log('display arr', displayArray)
+    displayArray.forEach(function(element, index) {
+      displayString += element + '\n';
+    })
+    // console.log('display string', displayString)
+
+
+    // if (arrayCursorYes.length <= this.state.rows) {
      
-      arrayCursorYes.forEach(function(element, index) {
-        displayString += element + '\n';
-      });  
-    } else {
-      // now we need to get the offset of the rows based on how many pages the user is in
-      var me = this;
-      arrayCursorYes.forEach(function(element, index) {
-        // arrayCy.length = 4
-        // rows = 4;
-        // arrayCy[1,5]
-        if (index <= me.state.rows + me.state.pages && index >= me.state.pages) {
-          displayString += element + '\n';
-        }
-      })
+    //   arrayCursorYes.forEach(function(element, index) {
+    //     displayString += element + '\n';
+    //   });  
+    //   console.log('current cursor', this.state.cursorPosition);
+    // } else if (arrayCursorYes.length > this.state.rows)  {
+      
+    //   // now we need to get the offset of the rows based on how many pages the user is in
+    //   var me = this;
+    //   arrayCursorYes.forEach(function(element, index) {
+    //     // arrayCy.length = 4
+    //     // rows = 4;
+    //     // arrayCy[1,5]
+    //     if (index <= me.state.rows + me.state.pages && index >= me.state.pages) {
+    //       displayString += element + '\n';
+    //     }
+    //   })
+     
+
     // if(array.length > rows) {
     //   this.setState({
     //     showScroll: true
     //   });
     // }
-    }
+    // }
     
     displayString = displayString.slice(0, displayString.length - 1);
+    // console.log('display string ', displayString);
     return(
       <View>
         <View style={{ flex: 1, flexDirection: 'row',  transform: [{ translate: [-1, 0.2, -2] }]}}>
