@@ -101,17 +101,18 @@ handleForward() {
 }
 
 handleSpacebar() {
-  if (this.state.cursorPosition === this.state.textString.length + 1) {
-    this.setState({
-      textString: this.state.textString + ' ',
-      cursorPosition: this.state.cursorPosition + 1
-    });
-  } else {
-    this.setState({
-      textString: this.state.textString.slice(0, this.state.cursorPosition) + ' ' + this.state.textString.slice(this.state.cursorPosition),
-      cursorPosition: this.state.cursorPosition + 1
-    });
-  }
+  // if (this.state.cursorPosition === this.state.textString.length + 1) {
+  //   this.setState({
+  //     textString: this.state.textString + ' ',
+  //     cursorPosition: this.state.cursorPosition + 1
+  //   });
+  // } else {
+  //   this.setState({
+  //     textString: this.state.textString.slice(0, this.state.cursorPosition) + ' ' + this.state.textString.slice(this.state.cursorPosition),
+  //     cursorPosition: this.state.cursorPosition + 1
+  //   });
+  // }
+  this.props.handleSpace();
 }
 
 handleReturn() {
