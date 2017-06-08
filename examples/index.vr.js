@@ -8,7 +8,7 @@ export default class Example extends React.Component {
     return (
       <View>
         <Pano source={asset('chess-world.jpg')}/>
-        <TextInput rows={4} col={40}/>
+        <TextInput rows={2} cols={20}/>
       </View>
     );
   }
