@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, VrButton, StyleSheet, Text } from 'react-vr';
+import { View, VrButton, StyleSheet, Text, Animated } from 'react-vr';
 
 var styles = StyleSheet.create({
   text: {
@@ -16,16 +16,39 @@ var styles = StyleSheet.create({
     borderWidth: 0.005,
     flex: 1,
     transform: [{translate: [-1,0,-1.5]}],
-    backgroundColor: '#0d0d0d',
-    alignItems: 'center',
-    opacity: 0.5,
+    alignItems: 'center'
+
   }
 })
-
 class KeyboardButton extends Component {
+    constructor(props){
+      super(props);
+      this.state = {
+        backgroundColor: '#0d0d0d',
+        opacity: 0.5
+      }
+    }
+    handleTheClick() {
+      this.setState({backgroundColor: 'white'},(()=>{ setTimeout((()=>{
+        return this.test.bind(this);
+      })(),1)})());  
+      if (this.props.isDisabled === false) {
+        this.props.clickHandler(this.props.value)
+      }
+      ;
+    }
+    test() {
+      this.setState({backgroundColor: 'green'});
+      
+    }
   render() {
     return (
-      <VrButton onClick={this.props.isDisabled === false ? this.props.clickHandler.bind(this, this.props.value) : null} style={styles.button}>
+      <VrButton 
+      onClick={this.handleTheClick.bind(this)}
+      style={[styles.button, {backgroundColor: this.props.isDisabled === false? this.state.backgroundColor:'red'}, {opacity: this.state.opacity}]}
+      onEnter={() => this.setState({backgroundColor: 'green'})}
+      onExit={() => this.setState({backgroundColor: '#0d0d0d'})}
+      >
         <Text style={styles.text}>{this.props.value}</Text>
       </VrButton>  
     );
