@@ -17,9 +17,12 @@ class TextInput extends Component {
       submitHandler: this.props.onSubmit || null,
       showScroll: false,
       toggleCursor: true,
-      x: -2,
+      x: -1,
       y: 0.2,
-      z: -2
+      z: -1.5,
+      pages : 0,
+      start : 0,
+      end: (this.props.rows || 4) * (this.props.cols || 50)
     }
   }
 
@@ -47,6 +50,8 @@ handleAllLetters(value) {
     textArrayCursorNo: newArrNo,
     cursorPosition: this.state.cursorPosition + 1,
     text: this.generateText()
+  }, () => {
+    this.handleCursorFollow.bind(this)();
   });
 }
 
@@ -58,6 +63,24 @@ handleDelete() {
     textArrayCursorYes: arr,
     textArrayCursorNo: arr2,
     cursorPosition: this.state.cursorPosition - 1
+  }, () => {
+    // this.handleCursorFollow.bind(this)();
+    if (this.state.textArrayCursorYes.length > this.state.rows * this.state.columns) {
+      console.log('total space, LENGTH , start, end', this.state.rows*this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
+      if ((this.state.cursorPosition + 1) % this.state.columns === 0) {
+        console.log('CURSOR AT SPOT ', this.state.cursorPosition);
+        console.log('start, end ', this.state.start, this.state.end);
+        this.setState({
+          start: this.state.start - this.state.columns,
+          end: this.state.end - this.state.columns
+        });
+      }
+    } else {
+      this.setState({
+        start: 0,
+        end: (this.props.rows || 4) * (this.props.cols || 50)
+      })
+    }
   });
 
 }
@@ -154,16 +177,25 @@ paginate(s) {
       var start = this.state.start;
       var end = this.state.end;
       while (end <= this.state.cursorPosition) {
-        start++;
-        end++;
+        // if (end  > this.state.textArrayCursorYes.length) {
+        //   start = start + this.state.columns;
+        //   end = this.state.textArrayCursorYes.length - 1;
+        // } else {
+          start = start + this.state.columns;
+          end = end + this.state.columns;
+        // }
       }
     } else if (this.state.cursorPosition < this.state.start) {
       var start = this.state.start;
       var end = this.state.end;
-      while (start >= this.state.cursorPosition) {
-        start--;
-        end--;
+      while (start  >= this.state.cursorPosition) {
+        start = start - this.state.columns;
+        end = end - this.state.columns;
       }
+
+    } else {
+      start = this.state.start;
+      end = this.state.end;
     }
 
     this.setState({
@@ -251,14 +283,14 @@ paginate(s) {
     return(
       <View>
         <View>
-          <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 20, height: this.state.rows / 10, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
+          <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 15, height: this.state.rows / 10, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
             {displayString}
           </Text> 
-          <View style={{ transform: [{ translate: [this.state.x+2.5, this.state.y+.35, this.state.z] }] }}>
+          <View style={{ transform: [{ translate: [this.state.x + 2.5, this.state.y + 0.35, this.state.z] }] }}>
           <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)}/>
           </View>
         </View>
-        <View style={[{width: this.state.columns / 15},{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }] }]}>
+        <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }] }}>
           <Keyboard handleSubmit={this.handleSubmit.bind(this)} handleAllLetters={this.handleAllLetters.bind(this)} handleDelete={this.handleDelete.bind(this)} handleForward={this.handleForward.bind(this)} handleBack={this.handleBack.bind(this)} />
         </View>
       </View>);

@@ -10,7 +10,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "chai": "^4.0.2",
     "express": "^4.15.3",
+    "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
     "ovrui": "^1.1.0",
     "path": "^0.12.7",
