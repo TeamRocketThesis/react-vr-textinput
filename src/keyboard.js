@@ -143,7 +143,7 @@ getLayout () {
     var layoutArray = this.getLayout();
     numberArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
     return (
-      <View>
+      <View style={{position: 'relative'}}>
       <View style={styles.row}>
         {numberArray.map((number) => <KeyboardButton this={this} value={number} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
         <KeyboardButton value={'Delete'} clickHandler={this.handleDelete.bind(this)} isDisabled={false} />
