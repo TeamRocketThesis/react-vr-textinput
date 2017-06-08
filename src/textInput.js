@@ -20,13 +20,13 @@ class TextInput extends Component {
     }
   }
 
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        toggleCursor: !this.state.toggleCursor
-      })
-    }, 500)
-  }
+  // componentDidMount() {
+  //   setInterval(() => {
+  //     this.setState({
+  //       toggleCursor: !this.state.toggleCursor
+  //     })
+  //   }, 500)
+  // }
 
 generateText() {
   var string = '';
@@ -60,35 +60,40 @@ handleDelete() {
 }
 
 handleForward() {
-  var cp = this.state.cursorPosition;
-  var s = this.state.textArrayCursorYes;
-  var s2 = this.state.textArrayCursorNo;
+  if (this.state.cursorPosition < this.state.textArrayCursorYes.length) {
+    var cp = this.state.cursorPosition;
+    var s = this.state.textArrayCursorYes;
+    var s2 = this.state.textArrayCursorNo;
 
-  s = s.slice(0, cp) + s.slice(cp + 1, cp + 2) + s.slice(cp, cp + 1) + s.slice(cp + 2);
-  s2 = s2.slice(0, cp) + s2.slice(cp + 1, cp + 2) + s2.slice(cp, cp + 1) + s2.slice(cp + 2);
+    s = s.slice(0, cp) + s.slice(cp + 1, cp + 2) + s.slice(cp, cp + 1) + s.slice(cp + 2);
+    s2 = s2.slice(0, cp) + s2.slice(cp + 1, cp + 2) + s2.slice(cp, cp + 1) + s2.slice(cp + 2);
 
-  this.setState({
-    textArrayCursorYes: s,
-    textArrayCursorNo: s2,
-    cursorPosition: this.state.cursorPosition + 1
-  });
+    this.setState({
+      textArrayCursorYes: s,
+      textArrayCursorNo: s2,
+      cursorPosition: this.state.cursorPosition + 1
+    });
+  }
 }
 
 handleBack() {
-var cp = this.state.cursorPosition;
-var s = this.state.textArrayCursorYes;
-var s2 = this.state.textArrayCursorNo;
-console.log('s',s)
-console.log('s2',s2)
 
-s = s.slice(0, cp-1) + s.slice(cp, cp+1) + s.slice(cp-1, cp) + s.slice(cp+1);
-s2 = s2.slice(0, cp - 1) + s2.slice(cp, cp + 1) + s2.slice(cp - 1, cp) + s2.slice(cp + 1);
+  if (this.state.cursorPosition !== 0) {
+    var cp = this.state.cursorPosition;
+    var s = this.state.textArrayCursorYes;
+    var s2 = this.state.textArrayCursorNo;
+    console.log('s',s)
+    console.log('s2',s2)
 
-this.setState({
-  textArrayCursorYes : s,
-  textArrayCursorNo: s2,
-  cursorPosition: this.state.cursorPosition - 1
-});
+    s = s.slice(0, cp-1) + s.slice(cp, cp+1) + s.slice(cp-1, cp) + s.slice(cp+1);
+    s2 = s2.slice(0, cp - 1) + s2.slice(cp, cp + 1) + s2.slice(cp - 1, cp) + s2.slice(cp + 1);
+
+    this.setState({
+      textArrayCursorYes : s,
+      textArrayCursorNo: s2,
+      cursorPosition: this.state.cursorPosition - 1
+    });
+  }
 }
 
 handleSubmit() {
@@ -136,25 +141,24 @@ paginate(s) {
 
   render() {
     var arrayCursorYes = this.paginate(this.state.textArrayCursorYes);
-    // console.log('arrayCursorYes ', arrayCursorYes);
     var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
-    // console.log('arrayCursorNo ', arrayCursorNo);
-// if(array.length > rows) {
-//   this.setState({
-//     showScroll: true
-//   });
-// }
-return(
-    <View>
-      <View style={{ transform: [{ translate: [0, 0.2, -2] }] }}>
-        <Text>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
-        <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
-      </View>
+    
+    // if(array.length > rows) {
+    //   this.setState({
+    //     showScroll: true
+    //   });
+    // }
+    return(
       <View>
-        <Keyboard handleSubmit={this.handleSubmit.bind(this)} handleAllLetters={this.handleAllLetters.bind(this)} handleDelete={this.handleDelete.bind(this)} handleForward={this.handleForward.bind(this)} handleBack={this.handleBack.bind(this)} />
-      </View>
-    </View>);
-  }
+        <View style={{ transform: [{ translate: [0, 0.2, -2] }] }}>
+          <Text>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
+          <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
+        </View>
+        <View>
+          <Keyboard handleSubmit={this.handleSubmit.bind(this)} handleAllLetters={this.handleAllLetters.bind(this)} handleDelete={this.handleDelete.bind(this)} handleForward={this.handleForward.bind(this)} handleBack={this.handleBack.bind(this)} />
+        </View>
+      </View>);
+      }
 }
 
 export default TextInput;
