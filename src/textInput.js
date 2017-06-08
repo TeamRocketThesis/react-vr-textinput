@@ -42,6 +42,19 @@ generateText() {
   return string;
 }
 
+handleSpace() {
+  var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + ' ' + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
+  var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + ' ' + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
+  this.setState({
+    textArrayCursorYes: newArrYes,
+    textArrayCursorNo: newArrNo,
+    cursorPosition: this.state.cursorPosition + 1,
+    text: this.generateText()
+  }, () => {
+    this.handleCursorFollow.bind(this)();
+  });
+}
+
 handleAllLetters(value) {
   var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
   var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
@@ -291,7 +304,13 @@ paginate(s) {
           </View>
         </View>
         <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }] }}>
-          <Keyboard handleSubmit={this.handleSubmit.bind(this)} handleAllLetters={this.handleAllLetters.bind(this)} handleDelete={this.handleDelete.bind(this)} handleForward={this.handleForward.bind(this)} handleBack={this.handleBack.bind(this)} />
+          <Keyboard handleSubmit={this.handleSubmit.bind(this)} 
+            handleAllLetters={this.handleAllLetters.bind(this)} 
+            handleDelete={this.handleDelete.bind(this)} 
+            handleForward={this.handleForward.bind(this)} 
+            handleBack={this.handleBack.bind(this)} 
+            handleSpace={this.handleSpace.bind(this)}
+          />
         </View>
       </View>);
       }
