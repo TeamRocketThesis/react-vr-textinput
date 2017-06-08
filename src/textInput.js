@@ -141,15 +141,25 @@ class TextInput extends Component {
 
   handleUp() {
     if (this.state.pages !== 0) {
+      var pages = this.state.pages - 1;
+      var start = this.state.start - this.state.columns;
+      var end = this.state.end - this.state.columns;
       this.setState({
-        pages: this.state.pages - 1
+        pages: pages,
+        start: start,
+        end : end
       })
-    }
+    } 
   }
 
   handleDown() {
+    var pages = this.state.pages + 1;
+    var start = this.state.start + this.state.columns;
+    var end = this.state.end + this.state.columns;
     this.setState({
-      pages: this.state.pages + 1
+      pages: pages,
+      start: start,
+      end: end
     })
   }
 
@@ -189,25 +199,31 @@ class TextInput extends Component {
     if (this.state.cursorPosition > this.state.end) {
       var start = this.state.start;
       var end = this.state.end;
+      var pages = this.state.pages;
       while (end <= this.state.cursorPosition) {
-          start = start + this.state.columns;
-          end = end + this.state.columns;
+        pages = pages + 1;
+        start = start + this.state.columns;
+        end = end + this.state.columns;
       }
     } else if (this.state.cursorPosition < this.state.start) {
       var start = this.state.start;
       var end = this.state.end;
+      var pages = this.state.pages;
       while (start  >= this.state.cursorPosition) {
+        pages = pages - 1;
         start = start - this.state.columns;
         end = end - this.state.columns;
       }
     } else {
+      var pages = this.state.pages;
       start = this.state.start;
       end = this.state.end;
     }
 
     this.setState({
       start: start,
-      end: end
+      end: end,
+      pages: pages
     })
 
   }
@@ -231,11 +247,15 @@ class TextInput extends Component {
             {displayString}
           </Text> 
           <View style={{ transform: [{ translate: [this.state.x + 2.5, this.state.y + 0.35, this.state.z] }] }}>
-          <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)}/>
+          <Scroll 
+            handleUp={this.handleUp.bind(this)} 
+            handleDown={this.handleDown.bind(this)}
+          />
           </View>
         </View>
         <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }] }}>
-          <Keyboard handleSubmit={this.handleSubmit.bind(this)} 
+          <Keyboard 
+            handleSubmit={this.handleSubmit.bind(this)} 
             handleAllLetters={this.handleAllLetters.bind(this)} 
             handleDelete={this.handleDelete.bind(this)} 
             handleForward={this.handleForward.bind(this)} 
@@ -244,7 +264,7 @@ class TextInput extends Component {
           />
         </View>
       </View>);
-      }
+    }
 }
 
 export default TextInput;
