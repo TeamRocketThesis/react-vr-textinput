@@ -5,8 +5,13 @@ class Scroll extends Component {
   constructor(props) {
     super(props);
   }
-
+componentWillMount(){
+  this.props.coordx;
+  this.props.coordy;
+  this.props.coordx;
+}
   render() {
+    console.log("YO YO", this.props.coords);
     return(<View>
       <VrButton onClick = {this.props.handleUp.bind(this)}>
         <Text> ^ </Text>
