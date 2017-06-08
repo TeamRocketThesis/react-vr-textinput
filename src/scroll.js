@@ -5,8 +5,8 @@ class Scroll extends Component {
   constructor(props) {
     super(props);
     this.state= {
-      backgroundColor1: 'transparent',
-      backgroundColor2: 'transparent'
+      backgroundColor1: 'rgba(0,0,0,0.5)',
+      backgroundColor2: 'rgba(0,0,0,0.5)'
     }
   }
 componentWillMount(){
@@ -15,12 +15,12 @@ componentWillMount(){
   this.props.coordx;
 }
  flash() {
-      this.setState({backgroundColor1: 'white'},(()=>{ setTimeout((()=>{
+      this.setState({backgroundColor1: 'green'},(()=>{ setTimeout((()=>{
         return this.flash1Follow.bind(this);
       })(),1)})());  
     }
   flash1Follow() {
-    this.setState({backgroundColor1: 'transparent'});
+    this.setState({backgroundColor1: 'rgba(0,0,0,0.5)'});
   }
 
 
@@ -28,12 +28,12 @@ componentWillMount(){
 
 
   flash2() {
-      this.setState({backgroundColor2: 'white'},(()=>{ setTimeout((()=>{
+      this.setState({backgroundColor2: 'green'},(()=>{ setTimeout((()=>{
         return this.flash2Follow.bind(this);
       })(),1)})());  
     }  
   flash2Follow() {
-    this.setState({backgroundColor2: 'transparent'});
+    this.setState({backgroundColor2: 'rgba(0,0,0,0.5)'});
   }
 
 
@@ -51,10 +51,10 @@ componentWillMount(){
   }
   render() {
     return(<View>
-      <VrButton onClick={this.handleClick1.bind(this)} style={[{height: .1}, {width: .1}, {backgroundColor: this.state.backgroundColor1}]}>
+      <VrButton onClick={this.handleClick1.bind(this)} style={[{height: .1}, {width: .1}, {backgroundColor: this.state.backgroundColor1}, {borderRadius: 10}]}>
         <Image  style={[{height: .1}, {width:.1}]} source = {{uri:'../static_assets/up.png'}}/>
         </VrButton>
-      <VrButton onClick={this.handleClick2.bind(this)} style={[{height: .1}, {width: .1}, {backgroundColor: this.state.backgroundColor2}]}>
+      <VrButton onClick={this.handleClick2.bind(this)} style={[{height: .1}, {width: .1}, {backgroundColor: this.state.backgroundColor2}, {borderRadius: 10}]}>
           <Image style={[{height: .1}, {width: .1}]} source={{uri:'../static_assets/down.png'}}/>
           </VrButton>
      </View>);
