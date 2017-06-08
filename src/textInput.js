@@ -15,11 +15,12 @@ class TextInput extends Component {
       rows: this.props.rows || 4,
       columns: this.props.cols || 50,
       submitHandler: this.props.onSubmit || null,
-      showScroll: false,
+      showScroll: true,
       toggleCursor: true,
       x: -2,
       y: 0.2,
-      z: -2
+      z: -2,
+      pages: 0
     }
   }
 
@@ -104,11 +105,19 @@ handleSubmit() {
 }
 
 handleUp() {
-
+  if (this.state.pages !== 0) {
+    this.setState({
+      pages: this.state.pages - 1
+    })
+  }
 }
 
 handleDown() {
-
+  
+    this.setState({
+      pages: this.state.pages + 1
+  
+  })
 }
 
 paginate(s) {
@@ -145,14 +154,40 @@ paginate(s) {
   render() {
     var arrayCursorYes = this.paginate(this.state.textArrayCursorYes);
     var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
-    
+    var displayString = '';
+
+    if (arrayCursorYes.length <= this.state.rows) {
+     
+      arrayCursorYes.forEach(function(element, index) {
+        displayString += element + '\n';
+      });  
+    } else {
+      // now we need to get the offset of the rows based on how many pages the user is in
+      var me = this;
+      arrayCursorYes.forEach(function(element, index) {
+        // arrayCy.length = 4
+        // rows = 4;
+        // arrayCy[1,5]
+        if (index <= me.state.rows + me.state.pages && index >= me.state.pages) {
+          displayString += element + '\n';
+        }
+      })
     // if(array.length > rows) {
     //   this.setState({
     //     showScroll: true
     //   });
     // }
+    }
+    
+    displayString = displayString.slice(0, displayString.length - 1);
     return(
       <View>
+        <View style={{ flex: 1, flexDirection: 'row',  transform: [{ translate: [-1, 0.2, -2] }]}}>
+          <Text style={{fontSize: 0.1, backgroundColor: 'lightblue', width: this.state.columns / 15, height: this.state.rows / 10}}>
+            {displayString}
+          </Text> 
+          <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
+        </View>
         <View>
           <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 20, height: this.state.rows / 10, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
           <View style={{ transform: [{ translate: [this.state.x+2.5, this.state.y+.35, this.state.z] }] }}>
