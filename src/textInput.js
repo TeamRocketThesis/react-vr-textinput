@@ -104,11 +104,17 @@ handleSubmit() {
 }
 
 handleUp() {
-
+  if (this.state.pages !== 0) {
+    this.setState({
+      pages: this.state.pages - 1
+    })
+  }
 }
 
 handleDown() {
-
+  this.setState({
+    pages: this.state.pages + 1
+  })
 }
 
 paginate(s) {
@@ -142,9 +148,100 @@ paginate(s) {
   return array;
 }
 
+  handleCursorFollow() {
+
+    if (this.state.cursorPosition > this.state.end) {
+      var start = this.state.start;
+      var end = this.state.end;
+      while (end <= this.state.cursorPosition) {
+        start++;
+        end++;
+      }
+    } else if (this.state.cursorPosition < this.state.start) {
+      var start = this.state.start;
+      var end = this.state.end;
+      while (start >= this.state.cursorPosition) {
+        start--;
+        end--;
+      }
+    }
+
+    this.setState({
+      start: start,
+      end: end
+    })
+
+  }
+
   render() {
     var arrayCursorYes = this.paginate(this.state.textArrayCursorYes);
     var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
+
+
+    // var arrayCursorYes = this.paginate(this.state.textArrayCursorYes);
+    // var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
+    // var displayString = '';
+
+    // if (this.state.cursorPosition > this.state.end) {
+    //   var start = this.state.start;
+    //   var end = this.state.end;
+    //   while (end <= this.state.cursorPosition) {
+    //     start++;
+    //     end++;
+    //   }
+    //   this.handleCursorFollow(start, end);
+
+    // } else if (this.state.cursorPosition < this.state.start) {
+    //   var start = this.state.start;
+    //   var end = this.state.end;
+    //   while (start >= this.state.cursorPosition) {
+    //     start--;
+    //     end--;
+    //   }
+    //   this.handleCursorFollow(start, end);
+
+    // }
+
+    // console.log('start',this.state.start)
+    // console.log('end',this.state.end)
+    var displayString = '';
+    var displayArray = this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end));
+    // console.log('display arr', displayArray)
+    displayArray.forEach(function (element, index) {
+      displayString += element + '\n';
+    })
+    // console.log('display string', displayString)
+
+
+    // if (arrayCursorYes.length <= this.state.rows) {
+
+    //   arrayCursorYes.forEach(function(element, index) {
+    //     displayString += element + '\n';
+    //   });  
+    //   console.log('current cursor', this.state.cursorPosition);
+    // } else if (arrayCursorYes.length > this.state.rows)  {
+
+    //   // now we need to get the offset of the rows based on how many pages the user is in
+    //   var me = this;
+    //   arrayCursorYes.forEach(function(element, index) {
+    //     // arrayCy.length = 4
+    //     // rows = 4;
+    //     // arrayCy[1,5]
+    //     if (index <= me.state.rows + me.state.pages && index >= me.state.pages) {
+    //       displayString += element + '\n';
+    //     }
+    //   })
+
+
+    // if(array.length > rows) {
+    //   this.setState({
+    //     showScroll: true
+    //   });
+    // }
+    // }
+
+    displayString = displayString.slice(0, displayString.length - 1);
+    // console.log('display string ', displayString);
     
     // if(array.length > rows) {
     //   this.setState({
@@ -154,7 +251,9 @@ paginate(s) {
     return(
       <View>
         <View>
-          <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 20, height: this.state.rows / 10, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
+          <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 20, height: this.state.rows / 10, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
+            {displayString}
+          </Text> 
           <View style={{ transform: [{ translate: [this.state.x+2.5, this.state.y+.35, this.state.z] }] }}>
           <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)}/>
           </View>
