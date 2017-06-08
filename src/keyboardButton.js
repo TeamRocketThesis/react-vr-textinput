@@ -16,22 +16,35 @@ var styles = StyleSheet.create({
     borderWidth: 0.005,
     flex: 1,
     transform: [{translate: [-1,0,-1.5]}],
-    alignItems: 'center',
-    opacity: 0.5,
+    alignItems: 'center'
   }
 })
 class KeyboardButton extends Component {
     constructor(props){
       super(props);
       this.state = {
-        backgroundColor: '#0d0d0d'
+        backgroundColor: '#0d0d0d',
+        opacity: 0.5
       }
+    }
+    handleTheClick() {
+      this.setState({backgroundColor: 'white'},(()=>{ setTimeout((()=>{
+        return this.test.bind(this);
+      })(),1)})());  
+      if (this.props.isDisabled === false) {
+        this.props.clickHandler(this.props.value)
+      }
+      ;
+    }
+    test() {
+      this.setState({backgroundColor: 'green'});
+      
     }
   render() {
     return (
       <VrButton 
-      onClick={this.props.isDisabled === false ? this.props.clickHandler.bind(this, this.props.value) : null}
-      style={[styles.button, {backgroundColor: this.props.isDisabled === false? this.state.backgroundColor:'red'}]}
+      onClick={this.handleTheClick.bind(this)}
+      style={[styles.button, {backgroundColor: this.props.isDisabled === false? this.state.backgroundColor:'red'}, {opacity: this.state.opacity}]}
       onEnter={() => this.setState({backgroundColor: 'green'})}
       onExit={() => this.setState({backgroundColor: '#0d0d0d'})}
       >
