@@ -154,7 +154,7 @@ paginate(s) {
           <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 20, height: this.state.rows / 10}}>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
           <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
         </View>
-        <View>
+        <View stye={{width: '50px'}}>
           <Keyboard handleSubmit={this.handleSubmit.bind(this)} handleAllLetters={this.handleAllLetters.bind(this)} handleDelete={this.handleDelete.bind(this)} handleForward={this.handleForward.bind(this)} handleBack={this.handleBack.bind(this)} />
         </View>
       </View>);
