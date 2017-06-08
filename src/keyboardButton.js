@@ -17,6 +17,7 @@ var styles = StyleSheet.create({
     flex: 1,
     transform: [{translate: [-1,0,-1.5]}],
     alignItems: 'center'
+
   }
 })
 class KeyboardButton extends Component {
