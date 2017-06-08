@@ -34,155 +34,155 @@ class TextInput extends Component {
   //   }, 500)
   // }
 
-generateText() {
-  var string = '';
-  for(var i =0; i < this.state.textArrayCursorYes.length; i++) {
-    if(this.state.textArrayCursorYes[i] !== '|') string += this.state.textArrayCursorYes[i];
+  generateText() {
+    var string = '';
+    for(var i =0; i < this.state.textArrayCursorYes.length; i++) {
+      if(this.state.textArrayCursorYes[i] !== '|') string += this.state.textArrayCursorYes[i];
+    }
+    return string;
   }
-  return string;
-}
 
-handleSpace() {
-  var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + ' ' + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
-  var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + ' ' + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
-  this.setState({
-    textArrayCursorYes: newArrYes,
-    textArrayCursorNo: newArrNo,
-    cursorPosition: this.state.cursorPosition + 1,
-    text: this.generateText()
-  }, () => {
-    this.handleCursorFollow.bind(this)();
-  });
-}
+  handleSpace() {
+    var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + ' ' + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
+    var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + ' ' + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
+    this.setState({
+      textArrayCursorYes: newArrYes,
+      textArrayCursorNo: newArrNo,
+      cursorPosition: this.state.cursorPosition + 1,
+      text: this.generateText()
+    }, () => {
+      this.handleCursorFollow.bind(this)();
+    });
+  }
 
-handleAllLetters(value) {
-  var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
-  var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
-  this.setState({
-    textArrayCursorYes: newArrYes,
-    textArrayCursorNo: newArrNo,
-    cursorPosition: this.state.cursorPosition + 1,
-    text: this.generateText()
-  }, () => {
-    this.handleCursorFollow.bind(this)();
-  });
-}
+  handleAllLetters(value) {
+    var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
+    var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
+    this.setState({
+      textArrayCursorYes: newArrYes,
+      textArrayCursorNo: newArrNo,
+      cursorPosition: this.state.cursorPosition + 1,
+      text: this.generateText()
+    }, () => {
+      this.handleCursorFollow.bind(this)();
+    });
+  }
 
-handleDelete() {
-  var arr = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition - 1) + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
-  var arr2 = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition - 1) + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
-  
-  this.setState({
-    textArrayCursorYes: arr,
-    textArrayCursorNo: arr2,
-    cursorPosition: this.state.cursorPosition - 1
-  }, () => {
-    // this.handleCursorFollow.bind(this)();
-    if (this.state.textArrayCursorYes.length > this.state.rows * this.state.columns) {
-      console.log('total space, LENGTH , start, end', this.state.rows*this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
-      if ((this.state.cursorPosition + 1) % this.state.columns === 0) {
-        console.log('CURSOR AT SPOT ', this.state.cursorPosition);
-        console.log('start, end ', this.state.start, this.state.end);
+  handleDelete() {
+    var arr = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition - 1) + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
+    var arr2 = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition - 1) + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
+
+    this.setState({
+      textArrayCursorYes: arr,
+      textArrayCursorNo: arr2,
+      cursorPosition: this.state.cursorPosition - 1
+    }, () => {
+      // this.handleCursorFollow.bind(this)();
+      if (this.state.textArrayCursorYes.length > this.state.rows * this.state.columns) {
+        console.log('total space, LENGTH , start, end', this.state.rows*this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
+        if ((this.state.cursorPosition + 1) % this.state.columns === 0) {
+          console.log('CURSOR AT SPOT ', this.state.cursorPosition);
+          console.log('start, end ', this.state.start, this.state.end);
+          this.setState({
+            start: this.state.start - this.state.columns,
+            end: this.state.end - this.state.columns
+          });
+        }
+      } else {
         this.setState({
-          start: this.state.start - this.state.columns,
-          end: this.state.end - this.state.columns
-        });
+          start: 0,
+          end: (this.props.rows || 4) * (this.props.cols || 50)
+        })
       }
-    } else {
+    });
+
+  }
+
+  handleForward() {
+    if (this.state.cursorPosition < this.state.textArrayCursorYes.length) {
+      var cp = this.state.cursorPosition;
+      var s = this.state.textArrayCursorYes;
+      var s2 = this.state.textArrayCursorNo;
+
+      s = s.slice(0, cp) + s.slice(cp + 1, cp + 2) + s.slice(cp, cp + 1) + s.slice(cp + 2);
+      s2 = s2.slice(0, cp) + s2.slice(cp + 1, cp + 2) + s2.slice(cp, cp + 1) + s2.slice(cp + 2);
+
       this.setState({
-        start: 0,
-        end: (this.props.rows || 4) * (this.props.cols || 50)
+        textArrayCursorYes: s,
+        textArrayCursorNo: s2,
+        cursorPosition: this.state.cursorPosition + 1
+      });
+    }
+  }
+
+  handleBack() {
+
+    if (this.state.cursorPosition !== 0) {
+      var cp = this.state.cursorPosition;
+      var s = this.state.textArrayCursorYes;
+      var s2 = this.state.textArrayCursorNo;
+      console.log('s',s)
+      console.log('s2',s2)
+
+      s = s.slice(0, cp-1) + s.slice(cp, cp+1) + s.slice(cp-1, cp) + s.slice(cp+1);
+      s2 = s2.slice(0, cp - 1) + s2.slice(cp, cp + 1) + s2.slice(cp - 1, cp) + s2.slice(cp + 1);
+
+      this.setState({
+        textArrayCursorYes : s,
+        textArrayCursorNo: s2,
+        cursorPosition: this.state.cursorPosition - 1
+      });
+    }
+  }
+
+  handleSubmit() {
+
+  }
+
+  handleUp() {
+    if (this.state.pages !== 0) {
+      this.setState({
+        pages: this.state.pages - 1
       })
     }
-  });
-
-}
-
-handleForward() {
-  if (this.state.cursorPosition < this.state.textArrayCursorYes.length) {
-    var cp = this.state.cursorPosition;
-    var s = this.state.textArrayCursorYes;
-    var s2 = this.state.textArrayCursorNo;
-
-    s = s.slice(0, cp) + s.slice(cp + 1, cp + 2) + s.slice(cp, cp + 1) + s.slice(cp + 2);
-    s2 = s2.slice(0, cp) + s2.slice(cp + 1, cp + 2) + s2.slice(cp, cp + 1) + s2.slice(cp + 2);
-
-    this.setState({
-      textArrayCursorYes: s,
-      textArrayCursorNo: s2,
-      cursorPosition: this.state.cursorPosition + 1
-    });
   }
-}
 
-handleBack() {
-
-  if (this.state.cursorPosition !== 0) {
-    var cp = this.state.cursorPosition;
-    var s = this.state.textArrayCursorYes;
-    var s2 = this.state.textArrayCursorNo;
-    console.log('s',s)
-    console.log('s2',s2)
-
-    s = s.slice(0, cp-1) + s.slice(cp, cp+1) + s.slice(cp-1, cp) + s.slice(cp+1);
-    s2 = s2.slice(0, cp - 1) + s2.slice(cp, cp + 1) + s2.slice(cp - 1, cp) + s2.slice(cp + 1);
-
+  handleDown() {
     this.setState({
-      textArrayCursorYes : s,
-      textArrayCursorNo: s2,
-      cursorPosition: this.state.cursorPosition - 1
-    });
-  }
-}
-
-handleSubmit() {
-
-}
-
-handleUp() {
-  if (this.state.pages !== 0) {
-    this.setState({
-      pages: this.state.pages - 1
+      pages: this.state.pages + 1
     })
   }
-}
 
-handleDown() {
-  this.setState({
-    pages: this.state.pages + 1
-  })
-}
+  paginate(s) {
+    if(s.length <= this.state.columns) return [s];
 
-paginate(s) {
-  if(s.length <= this.state.columns) return [s];
-  
-  var array = [];
-  var pointer1 = 0;
-  var pointer2 = this.state.columns;
-  var done = false;
-  
-  while(!done) {
-    // get string from pointer 1 to pointer 2 
-    var sub = s.slice(pointer1, pointer2);
-    //check if it contains * ... if yes if asterisk is at last position then pointer2++
-    if(sub.includes('|')) pointer2++;
-    //push pointer 1 - pointer2 string to array
-    array.push(s.slice(pointer1, pointer2));
-    //move pointer 1 to pointer2
-    pointer1 = pointer2;
-    //check if pointer1 + cols is less than s length. If yes then pointer2 = length and done is true. Else pointer2 = pointer1 + cols
-    if(pointer1 + this.state.columns < s.length) {
-      pointer2 = pointer1 + this.state.columns;
-    } else {
-      pointer2 = s.length;
-      done = true;
+    var array = [];
+    var pointer1 = 0;
+    var pointer2 = this.state.columns;
+    var done = false;
+
+    while(!done) {
+      // get string from pointer 1 to pointer 2 
+      var sub = s.slice(pointer1, pointer2);
+      //check if it contains * ... if yes if asterisk is at last position then pointer2++
+      if(sub.includes('|')) pointer2++;
+      //push pointer 1 - pointer2 string to array
+      array.push(s.slice(pointer1, pointer2));
+      //move pointer 1 to pointer2
+      pointer1 = pointer2;
+      //check if pointer1 + cols is less than s length. If yes then pointer2 = length and done is true. Else pointer2 = pointer1 + cols
+      if(pointer1 + this.state.columns < s.length) {
+        pointer2 = pointer1 + this.state.columns;
+      } else {
+        pointer2 = s.length;
+        done = true;
+      }
+
     }
-
-  }
       
-  if(s.slice(pointer1).length!== 0) array.push(s.slice(pointer1));
-  return array;
-}
+    if(s.slice(pointer1).length!== 0) array.push(s.slice(pointer1));
+    return array;
+  }
 
   handleCursorFollow() {
 
@@ -190,13 +190,8 @@ paginate(s) {
       var start = this.state.start;
       var end = this.state.end;
       while (end <= this.state.cursorPosition) {
-        // if (end  > this.state.textArrayCursorYes.length) {
-        //   start = start + this.state.columns;
-        //   end = this.state.textArrayCursorYes.length - 1;
-        // } else {
           start = start + this.state.columns;
           end = end + this.state.columns;
-        // }
       }
     } else if (this.state.cursorPosition < this.state.start) {
       var start = this.state.start;
@@ -205,7 +200,6 @@ paginate(s) {
         start = start - this.state.columns;
         end = end - this.state.columns;
       }
-
     } else {
       start = this.state.start;
       end = this.state.end;
@@ -221,78 +215,15 @@ paginate(s) {
   render() {
     var arrayCursorYes = this.paginate(this.state.textArrayCursorYes);
     var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
-
-
-    // var arrayCursorYes = this.paginate(this.state.textArrayCursorYes);
-    // var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
-    // var displayString = '';
-
-    // if (this.state.cursorPosition > this.state.end) {
-    //   var start = this.state.start;
-    //   var end = this.state.end;
-    //   while (end <= this.state.cursorPosition) {
-    //     start++;
-    //     end++;
-    //   }
-    //   this.handleCursorFollow(start, end);
-
-    // } else if (this.state.cursorPosition < this.state.start) {
-    //   var start = this.state.start;
-    //   var end = this.state.end;
-    //   while (start >= this.state.cursorPosition) {
-    //     start--;
-    //     end--;
-    //   }
-    //   this.handleCursorFollow(start, end);
-
-    // }
-
-    // console.log('start',this.state.start)
-    // console.log('end',this.state.end)
     var displayString = '';
     var displayArray = this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end));
-    // console.log('display arr', displayArray)
+    
     displayArray.forEach(function (element, index) {
       displayString += element + '\n';
     })
-    // console.log('display string', displayString)
-
-
-    // if (arrayCursorYes.length <= this.state.rows) {
-
-    //   arrayCursorYes.forEach(function(element, index) {
-    //     displayString += element + '\n';
-    //   });  
-    //   console.log('current cursor', this.state.cursorPosition);
-    // } else if (arrayCursorYes.length > this.state.rows)  {
-
-    //   // now we need to get the offset of the rows based on how many pages the user is in
-    //   var me = this;
-    //   arrayCursorYes.forEach(function(element, index) {
-    //     // arrayCy.length = 4
-    //     // rows = 4;
-    //     // arrayCy[1,5]
-    //     if (index <= me.state.rows + me.state.pages && index >= me.state.pages) {
-    //       displayString += element + '\n';
-    //     }
-    //   })
-
-
-    // if(array.length > rows) {
-    //   this.setState({
-    //     showScroll: true
-    //   });
-    // }
-    // }
 
     displayString = displayString.slice(0, displayString.length - 1);
-    // console.log('display string ', displayString);
-    
-    // if(array.length > rows) {
-    //   this.setState({
-    //     showScroll: true
-    //   });
-    // }
+   
     return(
       <View>
         <View>
