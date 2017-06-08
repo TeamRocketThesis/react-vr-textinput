@@ -150,8 +150,8 @@ paginate(s) {
     // }
     return(
       <View>
-        <View style={{ transform: [{ translate: [0, 0.2, -2] }] }}>
-          <Text>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
+        <View style={{ transform: [{ translate: [-1, 0.2, -2] }] }}>
+          <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 20, height: this.state.rows / 10}}>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
           <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
         </View>
         <View>
