@@ -16,7 +16,10 @@ class TextInput extends Component {
       columns: this.props.cols || 50,
       submitHandler: this.props.onSubmit || null,
       showScroll: false,
-      toggleCursor: true
+      toggleCursor: true,
+      x: -2,
+      y: 0.2,
+      z: -2
     }
   }
 
@@ -150,11 +153,13 @@ paginate(s) {
     // }
     return(
       <View>
-        <View style={{ transform: [{ translate: [-1, 0.2, -2] }] }}>
-          <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 20, height: this.state.rows / 10}}>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
-          <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
-        </View>
         <View>
+          <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 20, height: this.state.rows / 10, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
+          <View style={{ transform: [{ translate: [this.state.x+2.5, this.state.y+.35, this.state.z] }] }}>
+          <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)}/>
+          </View>
+        </View>
+        <View style={[{width: this.state.columns / 15},{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }] }]}>
           <Keyboard handleSubmit={this.handleSubmit.bind(this)} handleAllLetters={this.handleAllLetters.bind(this)} handleDelete={this.handleDelete.bind(this)} handleForward={this.handleForward.bind(this)} handleBack={this.handleBack.bind(this)} />
         </View>
       </View>);
