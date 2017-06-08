@@ -11,7 +11,6 @@ componentWillMount(){
   this.props.coordx;
 }
   render() {
-    console.log("YO YO", this.props.coords);
     return(<View>
       <VrButton onClick = {this.props.handleUp.bind(this)}>
         <Text> ^ </Text>
