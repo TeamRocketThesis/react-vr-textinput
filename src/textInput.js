@@ -141,25 +141,24 @@ paginate(s) {
 
   render() {
     var arrayCursorYes = this.paginate(this.state.textArrayCursorYes);
-    // console.log('arrayCursorYes ', arrayCursorYes);
     var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
-    // console.log('arrayCursorNo ', arrayCursorNo);
-// if(array.length > rows) {
-//   this.setState({
-//     showScroll: true
-//   });
-// }
-return(
-    <View>
-      <View style={{ transform: [{ translate: [0, 0.2, -2] }] }}>
-        <Text>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
-        <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
-      </View>
+    
+    // if(array.length > rows) {
+    //   this.setState({
+    //     showScroll: true
+    //   });
+    // }
+    return(
       <View>
-        <Keyboard handleSubmit={this.handleSubmit.bind(this)} handleAllLetters={this.handleAllLetters.bind(this)} handleDelete={this.handleDelete.bind(this)} handleForward={this.handleForward.bind(this)} handleBack={this.handleBack.bind(this)} />
-      </View>
-    </View>);
-  }
+        <View style={{ transform: [{ translate: [0, 0.2, -2] }] }}>
+          <Text>{this.state.toggleCursor ? this.state.textArrayCursorYes : this.state.textArrayCursorNo}</Text> 
+          <Scroll handleUp={this.handleUp.bind(this)} handleDown={this.handleDown.bind(this)} />
+        </View>
+        <View>
+          <Keyboard handleSubmit={this.handleSubmit.bind(this)} handleAllLetters={this.handleAllLetters.bind(this)} handleDelete={this.handleDelete.bind(this)} handleForward={this.handleForward.bind(this)} handleBack={this.handleBack.bind(this)} />
+        </View>
+      </View>);
+      }
 }
 
 export default TextInput;
