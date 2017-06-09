@@ -284,10 +284,10 @@ class TextInput extends Component {
             {displayString}
           </Text> 
           <View style={{ transform: [{ translate: [this.state.x + 2, this.state.y + 0.2, this.state.z] }] }}>
-          <Scroll 
+          {this.state.textArrayCursorYes.length > this.state.rows*this.state.columns? <Scroll 
             handleUp={this.handleUp.bind(this)} 
             handleDown={this.handleDown.bind(this)}
-          />
+          />: null}
           </View>
         </View>
         <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }] }}>
