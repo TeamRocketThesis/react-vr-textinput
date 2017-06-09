@@ -177,6 +177,7 @@ class TextInput extends Component {
   }
 
   handleUp() {
+    if(this.state.start!== 0) {
     if (this.state.pages !== 0) {
       var pages = this.state.pages - 1;
       var start = this.state.start - this.state.columns;
@@ -187,9 +188,11 @@ class TextInput extends Component {
         end : end
       })
     } 
+    }
   }
 
   handleDown() {
+    if(this.state.end < this.state.textArrayCursorYes.length) {
     var pages = this.state.pages + 1;
     var start = this.state.start + this.state.columns;
     var end = this.state.end + this.state.columns;
@@ -198,7 +201,9 @@ class TextInput extends Component {
       start: start,
       end: end
     })
+    }
   }
+
 
   paginate(s) {
     if(s.length <= this.state.columns) return [s];
