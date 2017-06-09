@@ -22,6 +22,7 @@ class TextInput extends Component {
       z: -1.5,
       pages : 0,
       start : 0,
+      returnCount: 0,
       end: (this.props.rows || 4) * (this.props.cols || 50)
     }
   }
@@ -56,7 +57,23 @@ class TextInput extends Component {
   }
 
   handleReturn() {
+    // var me = this;
+    // if(this.state.cursorPosition + 1 + this.state.columns*(this.state.returnCount +1) > this.state.end) var start = this.state.start + this.state.columns; else start = this.state.start;
+    // if(this.state.cursorPosition + 1 + this.state.columns*(this.state.returnCount +1) > this.state.end) var end = this.state.end + this.state.columns; else end = this.state.end;
+    // console.log('calculated start and end ', start, end);
 
+    var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + '\n' + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
+    var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + '\n' + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
+    this.setState({
+      textArrayCursorYes: newArrYes,
+      textArrayCursorNo: newArrNo,
+      cursorPosition: this.state.cursorPosition + 1,
+      text: this.generateText()
+    }, () => {
+      // console.log('this.state.start ', this.state.start);
+      // console.log('this.state.end ', this.state.end);
+      this.handleCursorFollow.bind(this)();
+    });
   }
 
   handleAllLetters(value) {
@@ -83,10 +100,10 @@ class TextInput extends Component {
     }, () => {
       // this.handleCursorFollow.bind(this)();
       if (this.state.textArrayCursorYes.length > this.state.rows * this.state.columns) {
-        console.log('total space, LENGTH , start, end', this.state.rows*this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
+        // console.log('total space, LENGTH , start, end', this.state.rows*this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
         if ((this.state.cursorPosition + 1) % this.state.columns === 0) {
-          console.log('CURSOR AT SPOT ', this.state.cursorPosition);
-          console.log('start, end ', this.state.start, this.state.end);
+          // console.log('CURSOR AT SPOT ', this.state.cursorPosition);
+          // console.log('start, end ', this.state.start, this.state.end);
           this.setState({
             start: this.state.start - this.state.columns,
             end: this.state.end - this.state.columns
@@ -118,11 +135,11 @@ class TextInput extends Component {
       }, () => {
         // this.handleCursorFollow.bind(this)();
         if (this.state.cursorPosition > this.state.rows * this.state.columns) {
-          console.log('total space, LENGTH , start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
-          console.log('CP ', this.state.cursorPosition);
+          // console.log('total space, LENGTH , start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
+          // console.log('CP ', this.state.cursorPosition);
           if ((this.state.cursorPosition - 1) % this.state.columns === 0) {
-            console.log('CURSOR AT SPOT ', this.state.cursorPosition);
-            console.log('start, end ', this.state.start, this.state.end);
+            // console.log('CURSOR AT SPOT ', this.state.cursorPosition);
+            // console.log('start, end ', this.state.start, this.state.end);
             this.setState({
               start: this.state.start + this.state.columns,
               end: this.state.end + this.state.columns
@@ -144,8 +161,8 @@ class TextInput extends Component {
       var cp = this.state.cursorPosition;
       var s = this.state.textArrayCursorYes;
       var s2 = this.state.textArrayCursorNo;
-      console.log('s',s)
-      console.log('s2',s2)
+      // console.log('s',s)
+      // console.log('s2',s2)
 
       s = s.slice(0, cp-1) + s.slice(cp, cp+1) + s.slice(cp-1, cp) + s.slice(cp+1);
       s2 = s2.slice(0, cp - 1) + s2.slice(cp, cp + 1) + s2.slice(cp - 1, cp) + s2.slice(cp + 1);
@@ -157,10 +174,10 @@ class TextInput extends Component {
       }, () => {
         // this.handleCursorFollow.bind(this)();
         if (this.state.cursorPosition > this.state.rows * this.state.columns) {
-          console.log('total space, LENGTH , start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
+          // console.log('total space, LENGTH , start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
           if ((this.state.cursorPosition + 1) % this.state.columns === 0) {
-            console.log('CURSOR AT SPOT ', this.state.cursorPosition);
-            console.log('start, end ', this.state.start, this.state.end);
+            // console.log('CURSOR AT SPOT ', this.state.cursorPosition);
+            // console.log('start, end ', this.state.start, this.state.end);
             this.setState({
               start: this.state.start - this.state.columns,
               end: this.state.end - this.state.columns
@@ -221,9 +238,35 @@ class TextInput extends Component {
     while(!done) {
       // get string from pointer 1 to pointer 2 
       var sub = s.slice(pointer1, pointer2);
+      // if(sub.includes(' ')&&
+      //   s[pointer2] !== ' '&&
+      //   sub[sub.length - 1] !== ' '&&
+      //   sub[sub.length - 1] !== '|') {
+
+      //   //move pointer 2 to after the last space in the substring and chop off there 
+      //   for(var i = sub.length-1; i>=0; i--) {
+      //     if(sub[i] === ' ') {
+      //       pointer2 = i+1;
+      //       break;
+      //     }
+      //   }
+      //   //push to array
+      //   array.push(s.slice(pointer1, pointer2));
+      //   //move pointer 1 to post pointer2
+      //   pointer1 = pointer2;
+      //   //move pointer2 appropriately 
+      //   if(pointer1 + this.state.columns < s.length) {
+      //   pointer2 = pointer1 + this.state.columns;
+      //   } else {
+      //   pointer2 = s.length;
+      //   done = true;
+      //  }
+      //  continue;
+      // }
       //check if it contains * ... if yes if asterisk is at last position then pointer2++
       if(sub.includes('|')) pointer2++;
-      //push pointer 1 - pointer2 string to array
+
+     
       array.push(s.slice(pointer1, pointer2));
       //move pointer 1 to pointer2
       pointer1 = pointer2;
@@ -280,7 +323,7 @@ class TextInput extends Component {
     var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
     var displayString = '';
     var displayArray = this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end));
-    
+    console.log('current display array ', displayArray);
     displayArray.forEach(function (element, index) {
       displayString += element + '\n';
     })
@@ -294,7 +337,8 @@ class TextInput extends Component {
             {displayString}
           </Text> 
           <View style={{ transform: [{ translate: [this.state.x + 2, this.state.y + 0.2, this.state.z] }] }}>
-          {this.state.textArrayCursorYes.length > this.state.rows*this.state.columns? <Scroll 
+          {this.state.textArrayCursorYes.length > this.state.rows*this.state.columns &&
+          this.state.cursorPosition % this.state.columns !== 0 ? <Scroll 
             handleUp={this.handleUp.bind(this)} 
             handleDown={this.handleDown.bind(this)}
           />: null}
