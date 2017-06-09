@@ -23,10 +23,6 @@ componentWillMount(){
     this.setState({backgroundColor1: 'rgba(0,0,0,0.5)'});
   }
 
-
-
-
-
   flash2() {
       this.setState({backgroundColor2: 'green'},(()=>{ setTimeout((()=>{
         return this.flash2Follow.bind(this);
@@ -36,19 +32,16 @@ componentWillMount(){
     this.setState({backgroundColor2: 'rgba(0,0,0,0.5)'});
   }
 
-
-
-
-
   handleClick1() {
     this.flash();
+    this.props.handleUp();
   }
-
-
 
   handleClick2() {
     this.flash2();
+    this.props.handleDown();
   }
+
   render() {
     return(<View>
       <VrButton onClick={this.handleClick1.bind(this)} style={[{height: .1}, {width: .1}, {backgroundColor: this.state.backgroundColor1}, {borderRadius: 10}]}>
