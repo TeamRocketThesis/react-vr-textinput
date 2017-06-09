@@ -162,10 +162,10 @@ getLayout () {
         <KeyboardButton value={this.state.isSymbolSelected ? layout.alphabet.displayValue : layout.symbol.displayValue} clickHandler={this.handleSymbolSelector.bind(this)} isDisabled={false} />
       </View>
       <View style={styles.row}>
-        <KeyboardButton value={'Back'} clickHandler={this.handleBack.bind(this)} isDisabled={false} />
-        <KeyboardButton value={'Forward'} clickHandler={this.handleForward.bind(this)} isDisabled={false} />
+        <KeyboardButton value={'<-'} clickHandler={this.handleBack.bind(this)} isDisabled={false} />
+        <KeyboardButton value={'->'} clickHandler={this.handleForward.bind(this)} isDisabled={false} />
         <KeyboardButton value={' '} clickHandler={this.handleSpacebar.bind(this)} isDisabled={false} />
-        <KeyboardButton value={'Return'} clickHandler={this.handleReturn.bind(this)} isDisabled={false} />
+        <KeyboardButton value={'Submit'} clickHandler={this.handleReturn.bind(this)} isDisabled={false} />
       </View>
     </View>
     );

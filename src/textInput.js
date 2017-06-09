@@ -22,8 +22,8 @@ class TextInput extends Component {
       z: -1.5,
       pages : 0,
       start : 0,
-      returnCount: 0,
-      end: (this.props.rows || 4) * (this.props.cols || 50)
+      end: (this.props.rows || 4) * (this.props.cols || 50),
+      focus: false
     }
   }
 
@@ -34,7 +34,9 @@ class TextInput extends Component {
   //     })
   //   }, 500)
   // }
-
+  focus() {
+    this.setState({focus: true});
+  }
   generateText() {
     var string = '';
     for(var i =0; i < this.state.textArrayCursorYes.length; i++) {
@@ -333,9 +335,11 @@ class TextInput extends Component {
     return(
       <View>
         <View>
+          <VrButton onClick={this.focus.bind(this)}>
           <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 15, height: this.state.rows / 10, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
             {displayString}
-          </Text> 
+          </Text>
+          </VrButton>
           <View style={{ transform: [{ translate: [this.state.x + 2, this.state.y + 0.2, this.state.z] }] }}>
           {this.state.textArrayCursorYes.length > this.state.rows*this.state.columns &&
           this.state.cursorPosition % this.state.columns !== 0 ? <Scroll 
@@ -344,7 +348,8 @@ class TextInput extends Component {
           />: null}
           </View>
         </View>
-        <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }] }}>
+        {this.state.focus ? (
+        <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }, {rotateX: -30}] }}>
           <Keyboard 
             handleAllLetters={this.handleAllLetters.bind(this)} 
             handleDelete={this.handleDelete.bind(this)} 
@@ -353,7 +358,7 @@ class TextInput extends Component {
             handleSpace={this.handleSpace.bind(this)}
             handleReturn={this.handleReturn.bind(this)}
           />
-        </View>
+        </View> ) : (<View/>)}
       </View>);
     }
 }
