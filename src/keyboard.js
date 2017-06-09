@@ -116,17 +116,18 @@ handleSpacebar() {
 }
 
 handleReturn() {
-  if (this.state.cursorPosition === this.state.textString.length + 1) {
-    this.setState({
-      textString: this.state.textString + '\n',
-      cursorPosition: this.state.cursorPosition + 1
-    });
-  } else {
-    this.setState({
-      textString: this.state.textString.slice(0, this.state.cursorPosition) + '\n' + this.state.textString.slice(this.state.cursorPosition),
-      cursorPosition: this.state.cursorPosition + 1
-    });
-  }
+  // if (this.state.cursorPosition === this.state.textString.length + 1) {
+  //   this.setState({
+  //     textString: this.state.textString + '\n',
+  //     cursorPosition: this.state.cursorPosition + 1
+  //   });
+  // } else {
+  //   this.setState({
+  //     textString: this.state.textString.slice(0, this.state.cursorPosition) + '\n' + this.state.textString.slice(this.state.cursorPosition),
+  //     cursorPosition: this.state.cursorPosition + 1
+  //   });
+  // }
+  this.props.handleReturn();
 }
 
 getLayout () {
