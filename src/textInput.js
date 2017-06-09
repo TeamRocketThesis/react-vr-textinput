@@ -111,6 +111,25 @@ class TextInput extends Component {
         textArrayCursorYes: s,
         textArrayCursorNo: s2,
         cursorPosition: this.state.cursorPosition + 1
+      }, () => {
+        // this.handleCursorFollow.bind(this)();
+        if (this.state.cursorPosition > this.state.rows * this.state.columns) {
+          console.log('total space, LENGTH , start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
+          console.log('CP ', this.state.cursorPosition);
+          if ((this.state.cursorPosition - 1) % this.state.columns === 0) {
+            console.log('CURSOR AT SPOT ', this.state.cursorPosition);
+            console.log('start, end ', this.state.start, this.state.end);
+            this.setState({
+              start: this.state.start + this.state.columns,
+              end: this.state.end + this.state.columns
+            });
+          }
+        } else {
+          this.setState({
+            start: 0,
+            end: (this.props.rows || 4) * (this.props.cols || 50)
+          })
+        }
       });
     }
   }
@@ -131,6 +150,24 @@ class TextInput extends Component {
         textArrayCursorYes : s,
         textArrayCursorNo: s2,
         cursorPosition: this.state.cursorPosition - 1
+      }, () => {
+        // this.handleCursorFollow.bind(this)();
+        if (this.state.cursorPosition > this.state.rows * this.state.columns) {
+          console.log('total space, LENGTH , start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
+          if ((this.state.cursorPosition + 1) % this.state.columns === 0) {
+            console.log('CURSOR AT SPOT ', this.state.cursorPosition);
+            console.log('start, end ', this.state.start, this.state.end);
+            this.setState({
+              start: this.state.start - this.state.columns,
+              end: this.state.end - this.state.columns
+            });
+          }
+        } else {
+          this.setState({
+            start: 0,
+            end: (this.props.rows || 4) * (this.props.cols || 50)
+          })
+        }
       });
     }
   }
