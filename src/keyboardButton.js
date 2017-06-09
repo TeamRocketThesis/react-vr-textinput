@@ -15,7 +15,6 @@ var styles = StyleSheet.create({
     padding: 0.05,
     borderWidth: 0.005,
     flex: 1,
-    transform: [{translate: [-1,0,-1.5]}],
     alignItems: 'center'
 
   }

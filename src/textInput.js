@@ -246,7 +246,7 @@ class TextInput extends Component {
           <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 15, height: this.state.rows / 10, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
             {displayString}
           </Text> 
-          <View style={{ transform: [{ translate: [this.state.x + 2.5, this.state.y + 0.35, this.state.z] }] }}>
+          <View style={{ transform: [{ translate: [this.state.x + 2, this.state.y + 0.2, this.state.z] }] }}>
           <Scroll 
             handleUp={this.handleUp.bind(this)} 
             handleDown={this.handleDown.bind(this)}
