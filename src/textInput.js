@@ -55,6 +55,10 @@ class TextInput extends Component {
     });
   }
 
+  handleReturn() {
+
+  }
+
   handleAllLetters(value) {
     var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
     var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
@@ -99,7 +103,7 @@ class TextInput extends Component {
   }
 
   handleForward() {
-    if (this.state.cursorPosition < this.state.textArrayCursorYes.length) {
+    if (this.state.cursorPosition < this.state.textArrayCursorYes.length - 1) {
       var cp = this.state.cursorPosition;
       var s = this.state.textArrayCursorYes;
       var s2 = this.state.textArrayCursorNo;
@@ -206,6 +210,7 @@ class TextInput extends Component {
 
 
   paginate(s) {
+
     if(s.length <= this.state.columns) return [s];
 
     var array = [];
@@ -297,12 +302,12 @@ class TextInput extends Component {
         </View>
         <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }] }}>
           <Keyboard 
-            handleSubmit={this.handleSubmit.bind(this)} 
             handleAllLetters={this.handleAllLetters.bind(this)} 
             handleDelete={this.handleDelete.bind(this)} 
             handleForward={this.handleForward.bind(this)} 
             handleBack={this.handleBack.bind(this)} 
             handleSpace={this.handleSpace.bind(this)}
+            handleReturn={this.handleReturn.bind(this)}
           />
         </View>
       </View>);
