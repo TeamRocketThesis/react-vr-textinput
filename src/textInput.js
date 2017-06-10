@@ -109,22 +109,41 @@ class TextInput extends Component {
       textArrayCursorNo: arr2,
       cursorPosition: this.state.cursorPosition - 1
     }, () => {
+      
       // this.handleCursorFollow.bind(this)();
-      if (this.state.textArrayCursorYes.length > this.state.rows * this.state.columns) {
-        // console.log('total space, LENGTH , start, end', this.state.rows*this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
-        if ((this.state.cursorPosition + 1) % this.state.columns === 0) {
+      // if (this.state.textArrayCursorYes.length > this.state.rows * this.state.columns) {
+        console.log('pre paginate start ', this.state.start);
+        console.log('pre paginate end ', this.state.end);
+        console.log('textString ', this.state.textArrayCursorYes.slice(this.state.start, this.state.end));
+        console.log('textString length ', this.state.textArrayCursorYes.slice(this.state.start, this.state.end).length);
+
+      if (this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end)).length < this.state.columns * this.state.rows) {
+        console.log('total space, LENGTH , CP, start, end', this.state.rows*this.state.columns, this.state.textArrayCursorYes.length, this.state.cursorPosition, this.state.start, this.state.end);
+        if ((this.state.cursorPosition - this.state.start + 1) % this.state.columns === 0) {
           // console.log('CURSOR AT SPOT ', this.state.cursorPosition);
           // console.log('start, end ', this.state.start, this.state.end);
+          console.log('CP', this.state.cursorPosition);
+          var start = this.state.start - this.state.columns;
+          var end = this.state.end - this.state.columns;
+          if (start < 0) {
+            start = 0;
+            end = this.state.rows * this.state.columns;
+          }
           this.setState({
-            start: this.state.start - this.state.columns,
-            end: this.state.end - this.state.columns
+            start: start,
+            end: end
           });
+          console.log('start in move up row',this.state.start)
+          console.log('end in move up row',this.state.end)
+          console.log('CP in move up row',this.state.cursorPosition)
         }
       } else {
+        console.log('Setting start to 0');
         this.setState({
           start: 0,
           end: (this.props.rows || 4) * (this.props.cols || 50)
         })
+      
       }
     });
 
@@ -184,21 +203,39 @@ class TextInput extends Component {
         cursorPosition: this.state.cursorPosition - 1
       }, () => {
         // this.handleCursorFollow.bind(this)();
-        if (this.state.cursorPosition > this.state.rows * this.state.columns) {
-          // console.log('total space, LENGTH , start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
-          if ((this.state.cursorPosition + 1) % this.state.columns === 0) {
+        // if (this.state.textArrayCursorYes.length > this.state.rows * this.state.columns) {
+        console.log('pre paginate start ', this.state.start);
+        console.log('pre paginate end ', this.state.end);
+        console.log('textString ', this.state.textArrayCursorYes.slice(this.state.start, this.state.end));
+        console.log('textString length ', this.state.textArrayCursorYes.slice(this.state.start, this.state.end).length);
+
+        if (this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end)).length < this.state.columns * this.state.rows) {
+          console.log('total space, LENGTH , CP, start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.cursorPosition, this.state.start, this.state.end);
+          if ((this.state.cursorPosition - this.state.start + 3) % this.state.columns === 0) {
             // console.log('CURSOR AT SPOT ', this.state.cursorPosition);
             // console.log('start, end ', this.state.start, this.state.end);
+            console.log('CP', this.state.cursorPosition);
+            var start = this.state.start - this.state.columns;
+            var end = this.state.end - this.state.columns;
+            if (start < 0) {
+              start = 0;
+              end = this.state.rows * this.state.columns;
+            }
             this.setState({
-              start: this.state.start - this.state.columns,
-              end: this.state.end - this.state.columns
+              start: start,
+              end: end
             });
+            console.log('start in move up row', this.state.start)
+            console.log('end in move up row', this.state.end)
+            console.log('CP in move up row', this.state.cursorPosition)
           }
         } else {
+          console.log('Setting start to 0');
           this.setState({
             start: 0,
             end: (this.props.rows || 4) * (this.props.cols || 50)
           })
+
         }
       });
     }
@@ -321,7 +358,7 @@ class TextInput extends Component {
     var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
     var displayString = '';
     var displayArray = this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end));
-    console.log('display array ', displayArray)
+    // console.log('display array ', displayArray)
     displayArray.forEach(function (element, index) {
       displayString += element + '\n';
     })
