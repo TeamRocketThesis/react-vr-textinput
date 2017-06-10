@@ -5,12 +5,7 @@ import TextInput from '../src/textInput';
 import chai, {expect, should} from 'chai';
 
 
-describe('client', function () {
-  
-  
 
-
-});
 describe('handleAllLetters', ()=>{
   it('should add one letter to output string', () =>{
 
