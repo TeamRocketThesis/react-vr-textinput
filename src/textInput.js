@@ -23,7 +23,8 @@ class TextInput extends Component {
       pages : 0,
       start : 0,
       end: (this.props.rows || 4) * (this.props.cols || 50),
-      focus: false
+      focus: false,
+      counter: 0
     }
   }
 
@@ -58,24 +59,33 @@ class TextInput extends Component {
     });
   }
 
-  handleReturn() {
-    // var me = this;
-    // if(this.state.cursorPosition + 1 + this.state.columns*(this.state.returnCount +1) > this.state.end) var start = this.state.start + this.state.columns; else start = this.state.start;
-    // if(this.state.cursorPosition + 1 + this.state.columns*(this.state.returnCount +1) > this.state.end) var end = this.state.end + this.state.columns; else end = this.state.end;
-    // console.log('calculated start and end ', start, end);
-
-    var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + '\n' + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
-    var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + '\n' + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
-    this.setState({
-      textArrayCursorYes: newArrYes,
-      textArrayCursorNo: newArrNo,
-      cursorPosition: this.state.cursorPosition + 1,
-      text: this.generateText()
-    }, () => {
-      // console.log('this.state.start ', this.state.start);
-      // console.log('this.state.end ', this.state.end);
-      this.handleCursorFollow.bind(this)();
+  handleSubmit() {
+    console.log(this.state.text);
+    var string = JSON.parse(JSON.stringify(this.state.textArrayCursorYes));
+    string = string.substring(0, string.length-1);
+    console.log("TEST", string);
+    this.setState({cursorPosition: 0,
+      textArrayCursorYes: '|',
+      textArrayCursorNo: ' ',
+      text: '',
+      selected: false,
+      rows: this.props.rows || 4,
+      columns: this.props.cols || 50,
+      submitHandler: this.props.onSubmit || null,
+      showScroll: false,
+      toggleCursor: true,
+      x: -1,
+      y: 0.2,
+      z: -1.5,
+      pages : 0,
+      start : 0,
+      end: (this.props.rows || 4) * (this.props.cols || 50),
+      focus: false
     });
+
+      this.props.onSubmit(string);
+
+    
   }
 
   handleAllLetters(value) {
@@ -195,9 +205,7 @@ class TextInput extends Component {
     }
   }
 
-  handleSubmit() {
 
-  }
 
   handleUp() {
     if(this.state.start!== 0) {
@@ -289,6 +297,8 @@ class TextInput extends Component {
   handleCursorFollow() {
 
     if (this.state.cursorPosition > this.state.end) {
+      var num = this.state.counter + 1;
+      this.setState({counter: num})
       var start = this.state.start;
       var end = this.state.end;
       var pages = this.state.pages;
@@ -298,6 +308,8 @@ class TextInput extends Component {
         end = end + this.state.columns;
       }
     } else if (this.state.cursorPosition < this.state.start) {
+      var minus = this.state.counter - 1;
+      this.setState({counter: minus})
       var start = this.state.start;
       var end = this.state.end;
       var pages = this.state.pages;
@@ -336,18 +348,17 @@ class TextInput extends Component {
       <View>
         <View>
           <VrButton onClick={this.focus.bind(this)}>
-          <Text style={{backgroundColor: 'lightblue', width: this.state.columns / 15, height: this.state.rows / 10, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
+          <Text style={{backgroundColor: 'grey', width: this.state.columns / 15, opacity: 0.8, height: this.state.rows / 10, fontSize: 0.08, fontWeight: '100', fontFamily: 'comicsans', includeFontPadding: true, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
             {displayString}
           </Text>
           </VrButton>
-          <View style={{ transform: [{ translate: [this.state.x + 2, this.state.y + 0.2, this.state.z] }] }}>
-          {this.state.textArrayCursorYes.length > this.state.rows*this.state.columns &&
-          this.state.cursorPosition % this.state.columns !== 0 ? <Scroll 
+          </View>
+          <View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.1, this.state.z] }] }}>
+          {this.state.counter >= 1 ? ( <Scroll 
             handleUp={this.handleUp.bind(this)} 
             handleDown={this.handleDown.bind(this)}
-          />: null}
+          /> ): (<View/>)}
           </View>
-        </View>
         {this.state.focus ? (
         <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }, {rotateX: -30}] }}>
           <Keyboard 
@@ -356,7 +367,7 @@ class TextInput extends Component {
             handleForward={this.handleForward.bind(this)} 
             handleBack={this.handleBack.bind(this)} 
             handleSpace={this.handleSpace.bind(this)}
-            handleReturn={this.handleReturn.bind(this)}
+            handleSubmit={this.handleSubmit.bind(this)}
           />
         </View> ) : (<View/>)}
       </View>);

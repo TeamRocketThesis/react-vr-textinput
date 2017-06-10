@@ -115,7 +115,7 @@ handleSpacebar() {
   this.props.handleSpace();
 }
 
-handleReturn() {
+handleSubmit() {
   // if (this.state.cursorPosition === this.state.textString.length + 1) {
   //   this.setState({
   //     textString: this.state.textString + '\n',
@@ -127,7 +127,7 @@ handleReturn() {
   //     cursorPosition: this.state.cursorPosition + 1
   //   });
   // }
-  this.props.handleReturn();
+  this.props.handleSubmit();
 }
 
 getLayout () {
@@ -165,7 +165,7 @@ getLayout () {
         <KeyboardButton value={'<-'} clickHandler={this.handleBack.bind(this)} isDisabled={false} />
         <KeyboardButton value={'->'} clickHandler={this.handleForward.bind(this)} isDisabled={false} />
         <KeyboardButton value={' '} clickHandler={this.handleSpacebar.bind(this)} isDisabled={false} />
-        <KeyboardButton value={'Submit'} clickHandler={this.handleReturn.bind(this)} isDisabled={false} />
+        <KeyboardButton value={'Submit'} clickHandler={this.handleSubmit.bind(this)} isDisabled={false} />
       </View>
     </View>
     );
