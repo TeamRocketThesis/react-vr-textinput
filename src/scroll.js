@@ -43,7 +43,7 @@ componentWillMount(){
   }
 
   render() {
-    return(<View>
+    return(<View style={{opacity: this.props.opacity}}>
       <VrButton onClick={this.handleClick1.bind(this)} style={[{height: .1}, {width: .1}, {backgroundColor: this.state.backgroundColor1}, {borderRadius: 10}]}>
         <Image  style={[{height: .1}, {width:.1}]} source = {{uri:'../static_assets/up.png'}}/>
         </VrButton>
