@@ -75,10 +75,10 @@ describe('paginate', ()=>{
   });
 });
 describe('client', () => {
-  it('should generate the specified height and width', () => {
+  it('should generate the specified height and width for the textbox', () => {
 
   });
-  it('should fall back to defaults if no specified height or width', () => {
+  it('should fall back to defaults if no specified height or width for the textbox', () => {
 
   });
   it('should show keyboard only when the textbox is selected', () => {
