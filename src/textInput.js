@@ -89,8 +89,8 @@ class TextInput extends Component {
   }
 
   handleAllLetters(value) {
-    var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
-    var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
+    var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + value.trim() + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
+    var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + value.trim() + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
     this.setState({
       textArrayCursorYes: newArrYes,
       textArrayCursorNo: newArrNo,
@@ -372,9 +372,9 @@ class TextInput extends Component {
    
     return(
       <View>
-        <View style={{borderColor: 'white', borderWidth:  0.05, borderStyle: "solid", margin: 0.01}}>
+        <View>
           <VrButton onClick={this.focus.bind(this)}>
-            <Text style={{backgroundColor: 'grey', width: this.state.columns / 15, opacity: 0.8, height: this.state.rows / 10, fontSize: 0.08, fontWeight: '100', fontFamily: 'comicsans', includeFontPadding: true, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
+            <Text style={{backgroundColor: 'grey',  width: this.state.columns / 15, opacity: 0.8, height: this.state.rows / 10, fontSize: 0.04, fontFamily: 'sans-serif-thin', transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
               {displayString}
             </Text>
           </VrButton>
