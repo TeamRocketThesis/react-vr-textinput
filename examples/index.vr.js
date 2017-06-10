@@ -13,7 +13,7 @@ export default class Example extends React.Component {
     return (
       <View>
         <Pano source={asset('chess-world.jpg')}/>
-        <TextInput onSubmit={this.handleBoss.bind(this)} rows={2} cols={20}/>
+        <TextInput onSubmit={this.handleBoss.bind(this)} rows={2} cols={10}/>
       </View>
     );
   }

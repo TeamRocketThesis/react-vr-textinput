@@ -83,8 +83,6 @@ class TextInput extends Component {
     });
 
       this.props.onSubmit(string);
-
-    
   }
 
   handleAllLetters(value) {
@@ -150,7 +148,7 @@ class TextInput extends Component {
   }
 
   handleForward() {
-    if (this.state.cursorPosition < this.state.textArrayCursorYes.length - 1) {
+    if (this.state.cursorPosition < this.state.columns * this.state.rows - 1) {
       var cp = this.state.cursorPosition;
       var s = this.state.textArrayCursorYes;
       var s2 = this.state.textArrayCursorNo;
@@ -165,8 +163,8 @@ class TextInput extends Component {
       }, () => {
         // this.handleCursorFollow.bind(this)();
         if (this.state.cursorPosition > this.state.rows * this.state.columns) {
-          // console.log('total space, LENGTH , start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
-          // console.log('CP ', this.state.cursorPosition);
+          console.log('total space, LENGTH , start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
+          console.log('CP ', this.state.cursorPosition);
           if ((this.state.cursorPosition - 1) % this.state.columns === 0) {
             // console.log('CURSOR AT SPOT ', this.state.cursorPosition);
             // console.log('start, end ', this.state.start, this.state.end);
