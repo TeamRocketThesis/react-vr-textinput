@@ -23,13 +23,9 @@ class TextInput extends Component {
       pages : 0,
       start : 0,
       end: (this.props.rows || 4) * (this.props.cols || 50),
-<<<<<<< HEAD
-      focus: false
-=======
       focus: false,
       counter: 0,
       opacity: 0
->>>>>>> opacity set up
     }
   }
 
@@ -314,8 +310,12 @@ class TextInput extends Component {
 
   handleCursorFollow() {
 
+<<<<<<< HEAD
     // if (this.state.cursorPosition > this.state.end) {
     if (this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end)).length > this.state.rows) {
+=======
+    if (this.state.cursorPosition > this.state.end) {
+>>>>>>> testing opacity conditional set
       var start = this.state.start;
       var end = this.state.end;
       var pages = this.state.pages;
@@ -372,7 +372,7 @@ class TextInput extends Component {
    
     return(
       <View>
-        <View style={{borderColor: 'white', borderWidth:  0.005, borderStyle: "solid"}}>
+        <View style={{borderColor: 'white', borderWidth:  0.05, borderStyle: "solid", margin: 0.01}}>
           <VrButton onClick={this.focus.bind(this)}>
             <Text style={{backgroundColor: 'grey', width: this.state.columns / 15, opacity: 0.8, height: this.state.rows / 10, fontSize: 0.08, fontWeight: '100', fontFamily: 'comicsans', includeFontPadding: true, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
               {displayString}
@@ -381,7 +381,7 @@ class TextInput extends Component {
         </View>
           <View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.1, this.state.z] }] }}>
           <Scroll
-            opacity={this.state.opacity} 
+            opacity={this.state.cursorPosition > (this.state.rows * this.state.columns) + 1 ? 1 : this.state.opacity} 
             handleUp={this.handleUp.bind(this)} 
             handleDown={this.handleDown.bind(this)}
           />
