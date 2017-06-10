@@ -238,60 +238,37 @@ class TextInput extends Component {
 
   paginate(s) {
 
-    if(s.length <= this.state.columns) return [s];
-
-    var array = [];
-    var pointer1 = 0;
-    var pointer2 = this.state.columns;
-    var done = false;
-
-    while(!done) {
-      // get string from pointer 1 to pointer 2 
-      var sub = s.slice(pointer1, pointer2);
-      // if(sub.includes(' ')&&
-      //   s[pointer2] !== ' '&&
-      //   sub[sub.length - 1] !== ' '&&
-      //   sub[sub.length - 1] !== '|') {
-
-      //   //move pointer 2 to after the last space in the substring and chop off there 
-      //   for(var i = sub.length-1; i>=0; i--) {
-      //     if(sub[i] === ' ') {
-      //       pointer2 = i+1;
-      //       break;
-      //     }
-      //   }
-      //   //push to array
-      //   array.push(s.slice(pointer1, pointer2));
-      //   //move pointer 1 to post pointer2
-      //   pointer1 = pointer2;
-      //   //move pointer2 appropriately 
-      //   if(pointer1 + this.state.columns < s.length) {
-      //   pointer2 = pointer1 + this.state.columns;
-      //   } else {
-      //   pointer2 = s.length;
-      //   done = true;
-      //  }
-      //  continue;
-      // }
-      //check if it contains * ... if yes if asterisk is at last position then pointer2++
-      if(sub.includes('|')) pointer2++;
-
-     
-      array.push(s.slice(pointer1, pointer2));
-      //move pointer 1 to pointer2
-      pointer1 = pointer2;
-      //check if pointer1 + cols is less than s length. If yes then pointer2 = length and done is true. Else pointer2 = pointer1 + cols
-      if(pointer1 + this.state.columns < s.length) {
-        pointer2 = pointer1 + this.state.columns;
+    var columns = 20;
+    var cols;
+    var results = [];
+    var temp = s.split(' ');
+    var string = '';
+    for (var i = 0; i < temp.length; i++) {
+      if (string.includes('|')) {
+        cols = columns + 1;
       } else {
-        pointer2 = s.length;
-        done = true;
+        cols = columns;
+      }
+      if (string.length === cols) {
+        console.log('length === cols module got called for word ', temp[i])
+        string = string.slice(0, string.length - 1);
+        results.push(string);
+        string = temp[i] + ' ';
       }
 
+      else if (string.length + temp[i].length > cols) {
+        console.log('cannot add the next word module got called for word ', temp[i])
+        string = string.slice(0, string.length - 1);
+        results.push(string);
+        string = temp[i] + ' ';
+      } else {
+        //add current item to the string
+        console.log('add word to string module got called for word ', temp[i])
+        string += temp[i] + ' '
+      }
     }
-      
-    if(s.slice(pointer1).length!== 0) array.push(s.slice(pointer1));
-    return array;
+    if (string !== '') results.push(string.slice(0, string.length - 1));
+    return results;
   }
 
   handleCursorFollow() {
@@ -307,16 +284,17 @@ class TextInput extends Component {
         start = start + this.state.columns;
         end = end + this.state.columns;
       }
-    } else if (this.state.cursorPosition < this.state.start) {
-      var minus = this.state.counter - 1;
-      this.setState({counter: minus})
-      var start = this.state.start;
-      var end = this.state.end;
-      var pages = this.state.pages;
-      while (start  >= this.state.cursorPosition) {
-        pages = pages - 1;
-        start = start - this.state.columns;
-        end = end - this.state.columns;
+
+      if (this.state.textArrayCursorYes[start] === ' ') {
+        start = start + 1;
+        end = end + 1;
+      } else {
+        var temp = start;
+        while(this.state.textArrayCursorYes[temp] !== ' ') {
+          temp--
+        }
+        start = temp + 1;
+        end = start + (this.state.columns * this.state.rows);
       }
     } else {
       var pages = this.state.pages;
@@ -337,7 +315,6 @@ class TextInput extends Component {
     var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
     var displayString = '';
     var displayArray = this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end));
-    console.log('current display array ', displayArray);
     displayArray.forEach(function (element, index) {
       displayString += element + '\n';
     })
