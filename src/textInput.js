@@ -284,17 +284,21 @@ class TextInput extends Component {
         start = start + this.state.columns;
         end = end + this.state.columns;
       }
-
       if (this.state.textArrayCursorYes[start] === ' ') {
         start = start + 1;
         end = end + 1;
       } else {
         var temp = start;
-        while(this.state.textArrayCursorYes[temp] !== ' ') {
+        while(this.state.textArrayCursorYes[temp] !== ' ' && temp !== 0) {
           temp--
         }
-        start = temp + 1;
-        end = start + (this.state.columns * this.state.rows);
+        if (temp === 0) {
+          start = this.state.start + this.state.columns
+          end = this.state.end + this.state.columns
+        } else {
+          start = temp + 1;
+          end = start + (this.state.columns * this.state.rows);
+        }
       }
     } else {
       var pages = this.state.pages;
@@ -325,16 +329,16 @@ class TextInput extends Component {
       <View>
         <View>
           <VrButton onClick={this.focus.bind(this)}>
-          <Text style={{backgroundColor: 'grey', width: this.state.columns / 15, opacity: 0.8, height: this.state.rows / 10, fontSize: 0.08, fontWeight: '100', fontFamily: 'comicsans', includeFontPadding: true, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
-            {displayString}
-          </Text>
+            <Text style={{backgroundColor: 'grey', width: this.state.columns / 15, opacity: 0.8, height: this.state.rows / 10, fontSize: 0.08, fontWeight: '100', fontFamily: 'comicsans', includeFontPadding: true, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
+              {displayString}
+            </Text>
           </VrButton>
-          </View>
-          <View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.1, this.state.z] }] }}>
+        </View>
+        <View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.1, this.state.z] }] }}>
           {this.state.counter >= 1 ? ( <Scroll 
-            handleUp={this.handleUp.bind(this)} 
-            handleDown={this.handleDown.bind(this)}
-          /> ): (<View/>)}
+          handleUp={this.handleUp.bind(this)} 
+          handleDown={this.handleDown.bind(this)}
+        /> ): (<View/>)}
           </View>
         {this.state.focus ? (
         <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }, {rotateX: -30}] }}>
