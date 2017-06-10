@@ -38,22 +38,52 @@ describe('handleShift', ()=>{
   it('should on re-press give you an all lower case keyboard', () =>{
 
   });
-  it('should not fire when pressed when keyboard is showing symbols ', () =>{
+  it('should not fire when pressed when keyboard is showing symbols', () =>{
 
   });
 });
 describe('handleBack', ()=>{
+  it('should on one press move the cursor one position back', () =>{
 
+  });
+  it('should not move the cursor past position 0', () =>{
+
+  });
 });
 describe('handleForward', ()=>{
+  it('should on one press move the cursor one position forward', () =>{
 
+  });
+  it('should not move the cursor beyond the last position', () =>{
+
+  });
 });
 describe('handleDown', ()=>{
+ it('should shows you the correct displayed text', () =>{
 
+  });
 });
 describe('handleUp', ()=>{
+  it('should shows you the correct displayed text', () =>{
 
+  });
 });
 describe('paginate', ()=>{
+  it('should return the right array when text < display area', () =>{
 
+  });
+  it('should return right array when text > display area', () =>{
+
+  });
 });
+describe('client', () => {
+  it('should generate the specified height and width', () => {
+
+  });
+  it('should fall back to defaults if no specified height or width', () => {
+
+  });
+  it('should show keyboard only when the textbox is selected', () => {
+
+  });
+})
