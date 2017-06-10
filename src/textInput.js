@@ -23,8 +23,7 @@ class TextInput extends Component {
       pages : 0,
       start : 0,
       end: (this.props.rows || 4) * (this.props.cols || 50),
-      focus: false,
-      counter: 0
+      focus: false
     }
   }
 
@@ -238,7 +237,7 @@ class TextInput extends Component {
 
   paginate(s) {
 
-    var columns = 20;
+    var columns = this.state.columns;
     var cols;
     var results = [];
     var temp = s.split(' ');
@@ -250,20 +249,20 @@ class TextInput extends Component {
         cols = columns;
       }
       if (string.length === cols) {
-        console.log('length === cols module got called for word ', temp[i])
+        // console.log('length === cols module got called for word ', temp[i])
         string = string.slice(0, string.length - 1);
         results.push(string);
         string = temp[i] + ' ';
       }
 
       else if (string.length + temp[i].length > cols) {
-        console.log('cannot add the next word module got called for word ', temp[i])
+        // console.log('cannot add the next word module got called for word ', temp[i])
         string = string.slice(0, string.length - 1);
         results.push(string);
         string = temp[i] + ' ';
       } else {
         //add current item to the string
-        console.log('add word to string module got called for word ', temp[i])
+        // console.log('add word to string module got called for word ', temp[i])
         string += temp[i] + ' '
       }
     }
@@ -273,12 +272,15 @@ class TextInput extends Component {
 
   handleCursorFollow() {
 
-    if (this.state.cursorPosition > this.state.end) {
-      var num = this.state.counter + 1;
-      this.setState({counter: num})
+    // if (this.state.cursorPosition > this.state.end) {
+    if (this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end)).length > this.state.rows) {
       var start = this.state.start;
       var end = this.state.end;
       var pages = this.state.pages;
+      
+      start = start + this.state.columns;
+      end = end + this.state.columns;
+      
       while (end <= this.state.cursorPosition) {
         pages = pages + 1;
         start = start + this.state.columns;
@@ -319,6 +321,7 @@ class TextInput extends Component {
     var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
     var displayString = '';
     var displayArray = this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end));
+    console.log('display array ', displayArray)
     displayArray.forEach(function (element, index) {
       displayString += element + '\n';
     })
@@ -335,10 +338,10 @@ class TextInput extends Component {
           </VrButton>
         </View>
         <View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.1, this.state.z] }] }}>
-          {this.state.counter >= 1 ? ( <Scroll 
-          handleUp={this.handleUp.bind(this)} 
-          handleDown={this.handleDown.bind(this)}
-        /> ): (<View/>)}
+          <Scroll 
+            handleUp={this.handleUp.bind(this)} 
+            handleDown={this.handleDown.bind(this)}
+          /> 
           </View>
         {this.state.focus ? (
         <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }, {rotateX: -30}] }}>
