@@ -310,12 +310,8 @@ class TextInput extends Component {
 
   handleCursorFollow() {
 
-<<<<<<< HEAD
     // if (this.state.cursorPosition > this.state.end) {
     if (this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end)).length > this.state.rows) {
-=======
-    if (this.state.cursorPosition > this.state.end) {
->>>>>>> testing opacity conditional set
       var start = this.state.start;
       var end = this.state.end;
       var pages = this.state.pages;
