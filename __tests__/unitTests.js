@@ -16,6 +16,9 @@ describe('handleAllLetters', ()=>{
   it('should add symbols correctly', () =>{
 
   });
+  it('should add character at correct cursor position', () =>{
+
+  });
 });
 describe('handleDelete', ()=>{
   it('should delete characters when cursor is at last position', () =>{
@@ -79,6 +82,15 @@ describe('client', () => {
 
   });
   it('should show keyboard only when the textbox is selected', () => {
+
+  });
+  it('should call the submithandler callback after the text is submitted', ()=>{
+
+  });
+  it('should only show column items in the text box if there is no cursor on the line', () =>{
+
+  });
+  it('should have the number of characters equal to the columns if cursor is not present', () => {
 
   });
 })
