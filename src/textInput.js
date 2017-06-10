@@ -325,7 +325,7 @@ class TextInput extends Component {
         end = end + this.state.columns;
       }
       if (this.state.textArrayCursorYes[start] === ' ') {
-        start = start + 1;
+        start = start + 2;
         end = end + 1;
       } else {
         var temp = start;
