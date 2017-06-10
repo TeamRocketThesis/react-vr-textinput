@@ -23,7 +23,9 @@ class TextInput extends Component {
       pages : 0,
       start : 0,
       end: (this.props.rows || 4) * (this.props.cols || 50),
-      focus: false
+      focus: false,
+      counter: 0,
+      opacity: 0
     }
   }
 
@@ -79,15 +81,16 @@ class TextInput extends Component {
       pages : 0,
       start : 0,
       end: (this.props.rows || 4) * (this.props.cols || 50),
-      focus: false
+      focus: false,
+      opacity: 0
     });
 
       this.props.onSubmit(string);
   }
 
   handleAllLetters(value) {
-    var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
-    var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + value + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
+    var newArrYes = this.state.textArrayCursorYes.slice(0, this.state.cursorPosition) + value.trim() + this.state.textArrayCursorYes.slice(this.state.cursorPosition);
+    var newArrNo = this.state.textArrayCursorNo.slice(0, this.state.cursorPosition) + value.trim() + this.state.textArrayCursorNo.slice(this.state.cursorPosition);
     this.setState({
       textArrayCursorYes: newArrYes,
       textArrayCursorNo: newArrNo,
@@ -367,16 +370,17 @@ class TextInput extends Component {
       <View>
         <View>
           <VrButton onClick={this.focus.bind(this)}>
-            <Text style={{backgroundColor: 'grey', width: this.state.columns / 15, opacity: 0.8, height: this.state.rows / 10, fontSize: 0.08, fontWeight: '100', fontFamily: 'comicsans', includeFontPadding: true, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
+            <Text style={{backgroundColor: 'grey',  width: this.state.columns / 15, opacity: 0.8, height: this.state.rows / 10, fontSize: 0.04, fontFamily: 'sans-serif-thin', transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
               {displayString}
             </Text>
           </VrButton>
         </View>
-        <View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.1, this.state.z] }] }}>
-          <Scroll 
+          <View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.1, this.state.z] }] }}>
+          <Scroll
+            opacity={this.state.cursorPosition > (this.state.rows * this.state.columns) + 1 ? 1 : this.state.opacity} 
             handleUp={this.handleUp.bind(this)} 
             handleDown={this.handleDown.bind(this)}
-          /> 
+          />
           </View>
         {this.state.focus ? (
         <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }, {rotateX: -30}] }}>
