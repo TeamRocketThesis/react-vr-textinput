@@ -28,14 +28,7 @@ class TextInput extends Component {
       opacity: 0
     }
   }
-
-  // componentDidMount() {
-  //   setInterval(() => {
-  //     this.setState({
-  //       toggleCursor: !this.state.toggleCursor
-  //     })
-  //   }, 500)
-  // }
+  
   focus() {
     this.setState({focus: true});
   }
@@ -61,10 +54,8 @@ class TextInput extends Component {
   }
 
   handleSubmit() {
-    console.log(this.state.text);
     var string = JSON.parse(JSON.stringify(this.state.textArrayCursorYes));
     string = string.substring(0, string.length-1);
-    console.log("TEST", string);
     this.setState({cursorPosition: 0,
       textArrayCursorYes: '|',
       textArrayCursorNo: ' ',
@@ -110,20 +101,8 @@ class TextInput extends Component {
       textArrayCursorNo: arr2,
       cursorPosition: this.state.cursorPosition - 1
     }, () => {
-      
-      // this.handleCursorFollow.bind(this)();
-      // if (this.state.textArrayCursorYes.length > this.state.rows * this.state.columns) {
-        console.log('pre paginate start ', this.state.start);
-        console.log('pre paginate end ', this.state.end);
-        console.log('textString ', this.state.textArrayCursorYes.slice(this.state.start, this.state.end));
-        console.log('textString length ', this.state.textArrayCursorYes.slice(this.state.start, this.state.end).length);
-
       if (this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end)).length < this.state.columns * this.state.rows) {
-        console.log('total space, LENGTH , CP, start, end', this.state.rows*this.state.columns, this.state.textArrayCursorYes.length, this.state.cursorPosition, this.state.start, this.state.end);
         if ((this.state.cursorPosition - this.state.start + 1) % this.state.columns === 0) {
-          // console.log('CURSOR AT SPOT ', this.state.cursorPosition);
-          // console.log('start, end ', this.state.start, this.state.end);
-          console.log('CP', this.state.cursorPosition);
           var start = this.state.start - this.state.columns;
           var end = this.state.end - this.state.columns;
           if (start < 0) {
@@ -134,12 +113,8 @@ class TextInput extends Component {
             start: start,
             end: end
           });
-          console.log('start in move up row',this.state.start)
-          console.log('end in move up row',this.state.end)
-          console.log('CP in move up row',this.state.cursorPosition)
         }
       } else {
-        console.log('Setting start to 0');
         this.setState({
           start: 0,
           end: (this.props.rows || 4) * (this.props.cols || 50)
@@ -164,13 +139,8 @@ class TextInput extends Component {
         textArrayCursorNo: s2,
         cursorPosition: this.state.cursorPosition + 1
       }, () => {
-        // this.handleCursorFollow.bind(this)();
         if (this.state.cursorPosition > this.state.rows * this.state.columns) {
-          console.log('total space, LENGTH , start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.start, this.state.end);
-          console.log('CP ', this.state.cursorPosition);
           if ((this.state.cursorPosition - 1) % this.state.columns === 0) {
-            // console.log('CURSOR AT SPOT ', this.state.cursorPosition);
-            // console.log('start, end ', this.state.start, this.state.end);
             this.setState({
               start: this.state.start + this.state.columns,
               end: this.state.end + this.state.columns
@@ -192,8 +162,6 @@ class TextInput extends Component {
       var cp = this.state.cursorPosition;
       var s = this.state.textArrayCursorYes;
       var s2 = this.state.textArrayCursorNo;
-      // console.log('s',s)
-      // console.log('s2',s2)
 
       s = s.slice(0, cp-1) + s.slice(cp, cp+1) + s.slice(cp-1, cp) + s.slice(cp+1);
       s2 = s2.slice(0, cp - 1) + s2.slice(cp, cp + 1) + s2.slice(cp - 1, cp) + s2.slice(cp + 1);
@@ -203,19 +171,8 @@ class TextInput extends Component {
         textArrayCursorNo: s2,
         cursorPosition: this.state.cursorPosition - 1
       }, () => {
-        // this.handleCursorFollow.bind(this)();
-        // if (this.state.textArrayCursorYes.length > this.state.rows * this.state.columns) {
-        console.log('pre paginate start ', this.state.start);
-        console.log('pre paginate end ', this.state.end);
-        console.log('textString ', this.state.textArrayCursorYes.slice(this.state.start, this.state.end));
-        console.log('textString length ', this.state.textArrayCursorYes.slice(this.state.start, this.state.end).length);
-
         if (this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end)).length < this.state.columns * this.state.rows) {
-          console.log('total space, LENGTH , CP, start, end', this.state.rows * this.state.columns, this.state.textArrayCursorYes.length, this.state.cursorPosition, this.state.start, this.state.end);
           if ((this.state.cursorPosition - this.state.start + 3) % this.state.columns === 0) {
-            // console.log('CURSOR AT SPOT ', this.state.cursorPosition);
-            // console.log('start, end ', this.state.start, this.state.end);
-            console.log('CP', this.state.cursorPosition);
             var start = this.state.start - this.state.columns;
             var end = this.state.end - this.state.columns;
             if (start < 0) {
@@ -226,12 +183,8 @@ class TextInput extends Component {
               start: start,
               end: end
             });
-            console.log('start in move up row', this.state.start)
-            console.log('end in move up row', this.state.end)
-            console.log('CP in move up row', this.state.cursorPosition)
           }
         } else {
-          console.log('Setting start to 0');
           this.setState({
             start: 0,
             end: (this.props.rows || 4) * (this.props.cols || 50)
@@ -287,20 +240,16 @@ class TextInput extends Component {
         cols = columns;
       }
       if (string.length === cols) {
-        // console.log('length === cols module got called for word ', temp[i])
         string = string.slice(0, string.length - 1);
         results.push(string);
         string = temp[i] + ' ';
       }
 
       else if (string.length + temp[i].length > cols) {
-        // console.log('cannot add the next word module got called for word ', temp[i])
         string = string.slice(0, string.length - 1);
         results.push(string);
         string = temp[i] + ' ';
       } else {
-        //add current item to the string
-        // console.log('add word to string module got called for word ', temp[i])
         string += temp[i] + ' '
       }
     }
@@ -359,7 +308,6 @@ class TextInput extends Component {
     var arrayCursorNo = this.paginate(this.state.textArrayCursorNo);
     var displayString = '';
     var displayArray = this.paginate(this.state.textArrayCursorYes.slice(this.state.start, this.state.end));
-    // console.log('display array ', displayArray)
     displayArray.forEach(function (element, index) {
       displayString += element + '\n';
     })
