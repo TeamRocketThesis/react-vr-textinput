@@ -318,7 +318,7 @@ class TextInput extends Component {
       <View>
         <View>
           <VrButton onClick={this.focus.bind(this)}>
-            <Text style={{backgroundColor: 'grey',  width: this.state.columns / 15, opacity: 0.8, height: this.state.rows / 10, fontSize: 0.04, fontFamily: 'sans-serif-thin', transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
+            <Text style={{ textAlign: 'center', backgroundColor: 'grey',  width: this.state.columns / 15, opacity: 0.8, height: this.state.rows / 10, fontSize: 0.04, fontFamily: 'sans-serif-thin', transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
               {displayString}
             </Text>
           </VrButton>
