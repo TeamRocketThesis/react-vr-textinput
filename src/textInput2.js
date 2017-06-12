@@ -375,6 +375,8 @@ class TextInput2 extends Component {
     }
   }
 
+  // ------
+
   handleSubmit() {
     var submitArray = this.state.displayArray;
     for (let i = 0; i < submitArray.length; i++) {
@@ -402,13 +404,23 @@ class TextInput2 extends Component {
   // ------
 
   handleUp() {
-
+    if (this.state.start !== 0) {
+      this.setState({
+        start: this.state.start - 1,
+        end: this.state.end - 1
+      });
+    }
   }
 
   // ------
 
   handleDown() {
-
+    if (this.state.end !== this.state.displayArray.length - 1) {
+      this.setState({
+        start: this.state.start + 1,
+        end: this.state.end + 1
+      });
+    }
   }
 
   render() {
