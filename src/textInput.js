@@ -16,13 +16,15 @@ class TextInput extends Component {
       submitHandler: this.props.onSubmit || null,
       showScroll: false,
       toggleCursor: true,
-      x: -1,
-      y: 0.2,
-      z: -1.5,
+      x: this.props.x || -1,
+      y: this.props.y|| 0.2,
+      z: this.props.z || -1.5,
       pages : 0,
       focus: false,
       counter: 0,
-      opacity: 0
+      opacity: 0,
+      textColor: this.props.textColor || 'white',
+      backgroundColor: this.props.backgroundColor || 'grey'
     }
   }
 
@@ -136,6 +138,9 @@ class TextInput extends Component {
   // ---------------
 
   handleAllLetters(val) {
+    if(val === '                                                         '){
+      val=' ';
+    }
     var start = this.state.start;
     var end = this.state.end;
     var cols = this.state.columns;
@@ -442,12 +447,12 @@ class TextInput extends Component {
       <View>
         <View>
           <VrButton onClick={this.focus.bind(this)}>
-            <Text style={{ textAlign: 'center', backgroundColor: 'grey',  width: this.state.columns / 15, opacity: 0.8, height: this.state.rows / 10, fontSize: 0.08, fontFamily: 'sans-serif-thin', transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
+            <Text style={{textAlign: 'center', backgroundColor: this.state.backgroundColor, color: this.state.textColor, width: this.state.columns / 20, opacity: 0.8, height: this.state.rows / 10, margin: 0.1, fontSize: 0.08, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
               {displayString}
             </Text>
           </VrButton>
         </View>
-          <View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.1, this.state.z] }] }}>
+          <View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.3, this.state.z] }] }}>
             <Scroll
               opacity={this.state.displayArray.length > this.state.rows ? 1 : this.state.opacity}
               handleUp={this.handleUp.bind(this)} 
@@ -455,8 +460,10 @@ class TextInput extends Component {
             />
           </View>
         {this.state.focus ? (
-        <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }, {rotateX: -30}] }}>
-          <Keyboard 
+        <View style={{transform: [{ translate: [this.state.x -0.2, this.state.y, this.state.z] }, {rotateX: -30}] }}>
+          <Keyboard
+            keyboardOnHover={this.props.keyboardOnHover} 
+            keyboardColor={this.props.keyboardColor} 
             handleAllLetters={this.handleAllLetters.bind(this)} 
             handleDelete={this.handleDelete.bind(this)}
             handleBack={this.handleBack.bind(this)}
