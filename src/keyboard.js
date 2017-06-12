@@ -87,24 +87,24 @@ getLayout () {
     return (
       <View>
       <View style={styles.row}>
-        {numberArray.map((number) => <KeyboardButton this={this} value={number} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
+        {numberArray.map((number) => <KeyboardButton key={number} this={this} value={number} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
         <KeyboardButton value={'Delete'} clickHandler={this.handleDelete.bind(this)} isDisabled={false} />
       </View>
       <View style={styles.row}>
-        {layoutArray[0].map((value) => <KeyboardButton value={value} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
+        {layoutArray[0].map((value) => <KeyboardButton key={value} value={value} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
       </View>
       <View style={styles.row}>
-        {layoutArray[1].map((value) => <KeyboardButton value={value} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
+        {layoutArray[1].map((value) => <KeyboardButton key={value} value={value} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
       </View>
       <View style={styles.row}>
         <KeyboardButton value={'Shift'} clickHandler={this.handleShift.bind(this)} isDisabled={this.state.isSymbolSelected}/>
-        {layoutArray[2].map((value) => <KeyboardButton value={value} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
+        {layoutArray[2].map((value) => <KeyboardButton key={value} value={value} clickHandler={this.handleAllValues.bind(this)} isDisabled={false}/> )}
         <KeyboardButton value={this.state.isSymbolSelected ? layout.alphabet.displayValue : layout.symbol.displayValue} clickHandler={this.handleSymbolSelector.bind(this)} isDisabled={false} />
       </View>
       <View style={styles.row}>
         <KeyboardButton value={'<-'} clickHandler={this.handleBack.bind(this)} isDisabled={false} />
         <KeyboardButton value={'->'} clickHandler={this.handleForward.bind(this)} isDisabled={false} />
-        <KeyboardButton value={'                                                                '} clickHandler={this.handleSpacebar.bind(this)} isDisabled={false} />
+        <KeyboardButton value={' '} clickHandler={this.handleAllValues.bind(this)} isDisabled={false} />
         <KeyboardButton value={'Submit'} clickHandler={this.handleSubmit.bind(this)} isDisabled={false} />
       </View>
     </View>
