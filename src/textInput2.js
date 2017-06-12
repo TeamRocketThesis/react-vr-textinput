@@ -11,7 +11,6 @@ class TextInput2 extends Component {
       end: this.props.rows - 1,
       displayArray: ['|'],
       text: '',
-      selected: false,
       rows: this.props.rows || 4,
       columns: this.props.cols || 50,
       submitHandler: this.props.onSubmit || null,
@@ -381,6 +380,22 @@ class TextInput2 extends Component {
     for (let i = 0; i < submitArray.length; i++) {
       submitArray[i] = submitArray[i].split("").filter( (element) => {return element !== '|'}).join(""); 
     }
+    this.setState({
+      start: 0,
+      end: this.props.rows - 1,
+      displayArray: ['|'],
+      text: '',
+      submitHandler: this.props.onSubmit || null,
+      showScroll: false,
+      toggleCursor: true,
+      x: -1,
+      y: 0.2,
+      z: -1.5,
+      pages: 0,
+      focus: false,
+      counter: 0,
+      opacity: 0
+    });
     this.props.onSubmit(submitArray.join(""));
   }
 
