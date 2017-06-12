@@ -14,7 +14,7 @@ export default class Example extends React.Component {
       <View>
         <Pano source={asset('chess-world.jpg')}/>
         <TextInput onSubmit={this.handleBoss.bind(this)} rows={2} 
-        cols={20} x={-1} y={0.2} z={-1.5} textColor={'smoke'} backgroundColor={'grey'} keyboardColor={null} keyboardOnHover={null}/>
+        cols={20} x={-1} y={0.2} z={-1.5} textColor={'white'} backgroundColor={'grey'} keyboardColor={null} keyboardOnHover={null}/>
       </View>
     );
   }
