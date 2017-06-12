@@ -375,6 +375,8 @@ class TextInput2 extends Component {
     }
   }
 
+  // ------
+
   handleSubmit() {
     var submitArray = this.state.displayArray;
     for (let i = 0; i < submitArray.length; i++) {
@@ -402,13 +404,23 @@ class TextInput2 extends Component {
   // ------
 
   handleUp() {
-
+    if (this.state.start !== 0) {
+      this.setState({
+        start: this.state.start - 1,
+        end: this.state.end - 1
+      });
+    }
   }
 
   // ------
 
   handleDown() {
-
+    if (this.state.end !== this.state.displayArray.length - 1) {
+      this.setState({
+        start: this.state.start + 1,
+        end: this.state.end + 1
+      });
+    }
   }
 
   render() {
@@ -435,13 +447,13 @@ class TextInput2 extends Component {
             </Text>
           </VrButton>
         </View>
-          {/*<View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.1, this.state.z] }] }}>
-          <Scroll
-            opacity={this.state.cursorPosition > (this.state.rows * this.state.columns) + 1 ? 1 : this.state.opacity} 
-            handleUp={this.handleUp.bind(this)} 
-            handleDown={this.handleDown.bind(this)}
-          />
-          </View>*/}
+          <View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.1, this.state.z] }] }}>
+            <Scroll
+              opacity={this.state.displayArray.length > this.state.rows ? 1 : this.state.opacity}
+              handleUp={this.handleUp.bind(this)} 
+              handleDown={this.handleDown.bind(this)}
+            />
+          </View>
         {this.state.focus ? (
         <View style={{transform: [{ translate: [this.state.x, this.state.y, this.state.z] }, {rotateX: -30}] }}>
           <Keyboard 
