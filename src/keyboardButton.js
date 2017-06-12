@@ -23,8 +23,10 @@ class KeyboardButton extends Component {
     constructor(props){
       super(props);
       this.state = {
-        backgroundColor: '#0d0d0d',
-        opacity: 0.5
+        backgroundColor: this.props.keyboardColor || '#0d0d0d',
+        opacity: 0.5,
+        keyboardOnHover: this.props.keyboardOnHover,
+        keyboardColor: this.props.keyboardColor
       }
     }
     handleTheClick() {
@@ -37,7 +39,7 @@ class KeyboardButton extends Component {
       ;
     }
     test() {
-      this.setState({backgroundColor: 'green'});
+      this.setState({backgroundColor: this.state.keyboardOnHover || 'green'});
       
     }
   render() {
@@ -45,8 +47,8 @@ class KeyboardButton extends Component {
       <VrButton 
       onClick={this.handleTheClick.bind(this)}
       style={[styles.button, {backgroundColor: this.props.isDisabled === false? this.state.backgroundColor:'red'}, {opacity: this.state.opacity}]}
-      onEnter={() => this.setState({backgroundColor: 'green'})}
-      onExit={() => this.setState({backgroundColor: '#0d0d0d'})}
+      onEnter={() => this.setState({backgroundColor: this.state.keyboardOnHover || 'green'})}
+      onExit={() => this.setState({backgroundColor: this.state.keyboardColor || '#0d0d0d'})}
       >
         <Text style={styles.text}>{this.props.value}</Text>
       </VrButton>  
