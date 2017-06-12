@@ -8,7 +8,7 @@ export default class Example extends React.Component {
   handleBoss(string) {
     console.log('yo this is my string', string)
   }
-  
+   
   render() {
     return (
       <View>
