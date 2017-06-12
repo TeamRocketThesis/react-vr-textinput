@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import { View, VrButton, StyleSheet, Text } from 'react-vr';
 import Keyboard from './keyboard';
 import Scroll from './scroll'
@@ -345,4 +345,4 @@ class TextInput extends Component {
     }
 }
 
-export default TextInput;
+export default TextInput;*/

@@ -104,7 +104,7 @@ getLayout () {
       <View style={styles.row}>
         <KeyboardButton value={'<-'} clickHandler={this.handleBack.bind(this)} isDisabled={false} />
         <KeyboardButton value={'->'} clickHandler={this.handleForward.bind(this)} isDisabled={false} />
-        <KeyboardButton value={'                                                                '} clickHandler={this.handleSpacebar.bind(this)} isDisabled={false} />
+        <KeyboardButton value={' '} clickHandler={this.handleAllValues.bind(this)} isDisabled={false} />
         <KeyboardButton value={'Submit'} clickHandler={this.handleSubmit.bind(this)} isDisabled={false} />
       </View>
     </View>

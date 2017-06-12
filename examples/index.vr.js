@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppRegistry, asset, Pano, Text, View} from 'react-vr';
 import Keyboard from '../src/keyboard';
-import TextInput from '../src/textInput'
+import TextInput2 from '../src/textInput2'
 
 export default class Example extends React.Component {
   
@@ -13,7 +13,7 @@ export default class Example extends React.Component {
     return (
       <View>
         <Pano source={asset('chess-world.jpg')}/>
-        <TextInput onSubmit={this.handleBoss.bind(this)} rows={2} cols={10}/>
+        <TextInput2 onSubmit={this.handleBoss.bind(this)} rows={2} cols={10}/>
       </View>
     );
   }
