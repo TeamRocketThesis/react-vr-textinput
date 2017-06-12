@@ -31,10 +31,10 @@ class TextInput2 extends Component {
 
     var index;
     var results = [];
-    for(var i = s.length -1 ; i >=0; i--) {
+    for(var i = s.length - 1 ; i >= 0; i--) {
       if(s[i] === ' ') {
         index = i;
-        if(s.slice(0,index+1).length > this.state.columns + 1) { //11 = cols + 1
+        if(s.slice(0, index + 1).length > this.state.columns + 1) { //11 = cols + 1
           continue;
         } else {
           index = i;
@@ -43,11 +43,11 @@ class TextInput2 extends Component {
       }
     }
     if(index) {
-    results[0] = s.slice(0, index+1);
-    results[1] = s.slice(index+1);
+      results[0] = s.slice(0, index + 1);
+      results[1] = s.slice(index + 1);
     } else {
       results[0] = s.slice(0, s.length - 2) + '-'
-      results[1] = s.slice(s.length -2);
+      results[1] = s.slice(s.length - 2);
     }
     return results;
   }
@@ -91,7 +91,7 @@ class TextInput2 extends Component {
 
     if(index > end) {
       var found = false;
-      while(! found) {
+      while(!found) {
         start++;
         end++;
       
@@ -162,7 +162,7 @@ class TextInput2 extends Component {
     console.log(arr);
 
     //if the current string has exceeded its length after adding a character ... 
-
+  
     if(arr[index].length > cols + 1) {
       // in a loop pass the values of the array to the calculate function to get back properly trimmed strings 
       var done = false;
@@ -179,7 +179,7 @@ class TextInput2 extends Component {
 
           if(arr[index]) {
             var s = list[1] + arr[index];
-            console.log('s ',s);
+            console.log('s ', s);
           } else {
             s = list[1];
             console.log('s in else ', s);
@@ -191,7 +191,7 @@ class TextInput2 extends Component {
           start = tempArray[1];
           end = tempArray[2];
 
-          if(s.length <= cols +1 ) {
+          if(s.length <= cols + 1) {
             done = true;
           } 
           console.log('done is ' + done + ' for ' + s);
@@ -234,7 +234,7 @@ class TextInput2 extends Component {
         arr[index] = arr[index].slice(1);
         arr[index - 1] = arr[index - 1] + '|';
         cp = arr[index - 1].length - 1;
-        index --;
+        index--;
         //see if the display window needs to be moved
         tempArray = this.findPosition(start, end);
         index = tempArray[0];
@@ -243,7 +243,7 @@ class TextInput2 extends Component {
         // console.log(tempArray);
       }
       //delete the character at cp-1
-      arr[index] = arr[index].slice(0, cp-1) + arr[index].slice(cp);
+      arr[index] = arr[index].slice(0, cp - 1) + arr[index].slice(cp);
       console.log(arr);
       //if the string with the cursor is lesser in length than cols + 1 then find the next string, append it etc. till all strings have moved correctly ... 
     
@@ -251,8 +251,8 @@ class TextInput2 extends Component {
         var done = false;
         while(!done) {
           //if the cursor is in the last string of the array, then there is nothing to do
-          console.log('index, arr.length -1 ', index, arr.length-1);
-          if(!arr[index+1]) {
+          console.log('index, arr.length -1 ', index, arr.length - 1);
+          if(!arr[index + 1]) {
             done = true;
             tempArray = this.findPosition(start, end);
             index = tempArray[0];
@@ -280,12 +280,10 @@ class TextInput2 extends Component {
           //if the length of this new string is < cols + 1, then arr[index] becomes this new string. arr[index + 1]; arr[index + 1] becomes the truncated part of the string
         
         }
-
-
       }
 
-      if(arr[arr.length -1] === null)  {
-        arr = arr.slice(0, arr.length-1);
+      if(arr[arr.length - 1] === null)  {
+        arr = arr.slice(0, arr.length - 1);
       }
 
       this.setState({
@@ -325,7 +323,7 @@ class TextInput2 extends Component {
         end = tempArray[2];
 
       } else {
-        arr[index] = arr[index].slice(0,cp -1) + '|' + arr[index][cp-1] + arr[index].slice(cp+1);
+        arr[index] = arr[index].slice(0,cp - 1) + '|' + arr[index][cp - 1] + arr[index].slice(cp + 1);
       }
 
       this.setState({
@@ -340,7 +338,7 @@ class TextInput2 extends Component {
   // ------
 
   handleForward() {
-    if(this.state.displayArray[this.state.displayArray.length-1][this.state.displayArray[this.state.displayArray.length-1].length - 1] !== '|') {
+    if(this.state.displayArray[this.state.displayArray.length - 1][this.state.displayArray[this.state.displayArray.length - 1].length - 1] !== '|') {
       var arr = this.state.displayArray;
       var start = this.state.start;
       var end = this.state.end;
@@ -357,7 +355,7 @@ class TextInput2 extends Component {
 
       if(cp === arr[index].length - 1) {
         console.log('cp = length - 1 in handleForward');
-        arr[index] = arr[index].slice(0, arr[index].length-1);
+        arr[index] = arr[index].slice(0, arr[index].length - 1);
         arr[index + 1] = '|' + arr[index + 1]  ;
         console.log('array[index] ', arr[index]);
         tempArray = this.findPosition(start, end);
@@ -366,7 +364,7 @@ class TextInput2 extends Component {
         end = tempArray[2];
 
       } else {
-        arr[index] = arr[index].slice(0,cp)  + arr[index][cp+1] + '|' + arr[index].slice(cp+2);
+        arr[index] = arr[index].slice(0, cp)  + arr[index][cp + 1] + '|' + arr[index].slice(cp + 2);
       }
 
       this.setState({
@@ -376,6 +374,14 @@ class TextInput2 extends Component {
       });
 
     }
+  }
+
+  handleSubmit() {
+    var submitArray = this.state.displayArray;
+    for (let i = 0; i < submitArray.length; i++) {
+      submitArray[i] = submitArray[i].split("").filter( (element) => {return element !== '|'}).join(""); 
+    }
+    this.props.onSubmit(submitArray.join(""));
   }
 
   // ------
@@ -428,6 +434,7 @@ class TextInput2 extends Component {
             handleDelete={this.handleDelete.bind(this)}
             handleBack={this.handleBack.bind(this)}
             handleForward={this.handleForward.bind(this)}
+            handleSubmit={this.handleSubmit.bind(this)}
           />
         </View> ) : (<View/>)}
       </View>);
