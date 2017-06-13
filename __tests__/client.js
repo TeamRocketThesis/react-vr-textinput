@@ -13,7 +13,7 @@ it('renders correctly', () => {
 
 describe('handleAllLetters', () => {
   it('should add one letter to output string', () => {
-
+    
   });
   it('should add multiple letters correctly', () => {
 
