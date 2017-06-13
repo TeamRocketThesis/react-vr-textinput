@@ -428,6 +428,18 @@ class TextInput extends Component {
     }
   }
 
+  // ------
+
+  showScroll() {
+
+    var total = 0;
+    for(var i = 0; i < this.state.displayArray.length; i++) {
+      if(this.state.displayArray[i] != '') total++;
+    }
+
+    return total > this.state.rows ? 1 : this.state.opacity;
+  }
+
   render() {
 
     var arr = this.state.displayArray;
@@ -454,7 +466,7 @@ class TextInput extends Component {
         </View>
           <View style={{ transform: [{ translate: [this.state.x + 1, this.state.y + 0.3, this.state.z] }] }}>
             <Scroll
-              opacity={this.state.displayArray.length > this.state.rows ? 1 : this.state.opacity}
+              opacity={this.showScroll.bind(this)()}
               handleUp={this.handleUp.bind(this)} 
               handleDown={this.handleDown.bind(this)}
             />
