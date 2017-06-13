@@ -45,5 +45,5 @@
 
 ## Tips
   - Any additional styling options can be applied to the component. Remember that rotate can be used to help place the entire component anywhere in 3D space. 
-  - Scroll keys show after two completed lines have been inputted. 
-  - Text cursor must be moved via forward and backward keys.
+  - Scroll keys show after only if the number of typed in rows exceeds the number of rows specified for the text box
+  - The cursor can be moved via forward and backward keys.
