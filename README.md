@@ -34,7 +34,7 @@
 
 ## Current Issues
 
-- This module is fully functional. Our next goal is to refactor for speed and also further enhance customizability through providing users even more props. Please feel free to ask for additional functionality and we will try to add features as soon as possible.
+- This module is fully functional. Our next goal is to refactor for speed and also further enhance customizability through providing users even more props. We are also working on adding auto-complete support for faster typing. This will be an optional component that users can select to enable with their text input box and virtual keyboard. Please feel free to ask for additional functionality and we will try to add features as soon as possible.
 
 ## Contributing
 
