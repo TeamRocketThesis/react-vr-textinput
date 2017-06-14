@@ -4,17 +4,26 @@ import Keyboard from '../src/keyboard';
 import TextInput from '../src/textInput'
 
 export default class Example extends React.Component {
-  
-  handleBoss(string) {
-    console.log('yo this is my string', string)
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: ''
+    }
+  }  
+  submitHandler(string) {
+    this.setState({
+      text: 'The Submit Handler received ' + string
+    });
   }
    
   render() {
     return (
       <View>
         <Pano source={asset('chess-world.jpg')}/>
-        <TextInput onSubmit={this.handleBoss.bind(this)} rows={2} 
+        <TextInput onSubmit={this.submitHandler.bind(this)} rows={2} 
         cols={20} x={-1} y={0.2} z={-1.5} textColor={'white'} backgroundColor={'grey'} keyboardColor={null} keyboardOnHover={null}/>
+        <Text style={{transform: [{ translate: [0.1, 0.7 , -1.5]}]}}>{this.state.text}</Text>
       </View>
     );
   }
