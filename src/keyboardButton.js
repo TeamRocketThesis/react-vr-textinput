@@ -39,7 +39,7 @@ class KeyboardButton extends Component {
       ;
     }
     test() {
-      this.setState({backgroundColor: this.state.keyboardOnHover || 'green'});
+      this.setState({backgroundColor: this.state.keyboardColor || '#0d0d0d'});
       
     }
   render() {
