@@ -34,7 +34,7 @@
 
 ## Current Issues
 
-- This module is fully functional. Our next goal is to refactor for speed and also further enhance customizability through providing users even more props. Please feel free to ask for additional functionality and we will try to add features as soon as possible.
+- This module is fully functional. Our next goal is to refactor for speed and also further enhance customizability through providing users even more props. We are also working on adding auto-complete support for faster typing. This will be an optional component that users can select to enable with their text input box and virtual keyboard. Please feel free to ask for additional functionality and we will try to add features as soon as possible.
 
 ## Contributing
 
@@ -45,5 +45,5 @@
 
 ## Tips
   - Any additional styling options can be applied to the component. Remember that rotate can be used to help place the entire component anywhere in 3D space. 
-  - Scroll keys show after two completed lines have been inputted. 
-  - Text cursor must be moved via forward and backward keys.
+  - Scroll keys show after only if the number of typed in rows exceeds the number of rows specified for the text box
+  - The cursor can be moved via forward and backward keys.
