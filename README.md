@@ -37,7 +37,7 @@ npm install react-vr-textinput
   - When the user is finished, the keyboard will hide itself after the submit button has been pressed.
   
   
- ![img] (http://www.giphy.com/gifs/l0IxZnxk8ZDLBbDFu)
+ ![] (https://media.giphy.com/media/l0IxZnxk8ZDLBbDFu/giphy.gif)
   
 
 ## Sample code 
