@@ -35,10 +35,7 @@ npm install react-vr-textinput
   
   - Click the TextBox Component to activate it.
   - When the user is finished, the keyboard will hide itself after the submit button has been pressed.
-  
-  
- ![] (https://media.giphy.com/media/l0IxZnxk8ZDLBbDFu/giphy.gif)
-  
+    
 
 ## Sample code 
 
