@@ -8,6 +8,12 @@
   - Sim Kang
   - Rishi Raje
 
+## Installation 
+
+```
+npm install react-vr-textinput
+```
+
 
 ## Usage
 
@@ -24,9 +30,45 @@
     8. backgroundColor - color for the background of the input field
     9. keyboardColor - color for keys on keyboard
     10. keyboardOnHover - color for the keys when the mouse or vr controller hover over.
+    
+    If not specified, all props except onSubmit will use default values.
   
   - Click the TextBox Component to activate it.
   - When the user is finished, the keyboard will hide itself after the submit button has been pressed.
+    
+
+## Sample code 
+
+The following example palces the textInput inside the View Component. Note the props that can be passed in. Beyond these, the text input box can be fully customized by directly accessinf the component source code.
+
+```js
+import React from 'react';
+import {View} from 'react-vr';
+import TextInput from 'react-vr-textinput'
+
+export default class Example extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }  
+  
+  submitHandler(string) {
+    console.log('the text received by the submitHandler is ' + string);
+  }
+   
+  render() {
+    return (
+      <View>
+        <TextInput onSubmit={this.submitHandler.bind(this)} rows={2} 
+        cols={20} x={-1} y={0.2} z={-1.5} textColor={'white'} backgroundColor={'grey'} keyboardColor={null} keyboardOnHover={null}/>
+      </View>
+    );
+  }
+};
+
+AppRegistry.registerComponent('Example', () => Example);
+
+```
 
 ## Requirements
 
