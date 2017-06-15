@@ -342,7 +342,7 @@ class TextInput extends Component {
   // ------
 
   handleForward() {
-    if(this.state.displayArray[this.state.displayArray.length - 1][this.state.displayArray[this.state.displayArray.length - 1].length - 1] !== '|') {
+    if(this.state.displayArray[this.state.displayArray.length - 1][this.state.displayArray[this.state.displayArray.length - 1].length - 1] !== '|' && (this.state.displayArray[this.state.end + 1] !== '' )) {
       var arr = this.state.displayArray;
       var start = this.state.start;
       var end = this.state.end;
