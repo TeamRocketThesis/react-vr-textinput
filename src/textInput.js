@@ -456,7 +456,7 @@ class TextInput extends Component {
     displayString = displayString.slice(0, displayString.length - 1);
 
     return(
-      <View style={{transform: [{rotateY: this.props.rotateY}, {rotateX: this.props.rotateX}]}}>
+      <View style={{transform: [{rotateY: this.props.rotateY || 0}, {rotateX: this.props.rotateX || 0}]}}>
         <View>
           <VrButton onClick={this.focus.bind(this)}>
             <Text style={{textAlign: 'center', backgroundColor: this.state.backgroundColor, color: this.state.textColor, width: this.state.columns / 20, opacity: 0.8, height: this.state.rows / 10, margin: 0.1, fontSize: 0.08, transform: [{ translate: [this.state.x, this.state.y, this.state.z] }]}}>
