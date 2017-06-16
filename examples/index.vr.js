@@ -22,7 +22,7 @@ export default class Example extends React.Component {
       <View>
         <Pano source={asset('chess-world.jpg')}/>
         <TextInput onSubmit={this.submitHandler.bind(this)} rows={2} 
-        cols={20} x={-1} y={0.2} z={-1.5} textColor={'black'} backgroundColor={'white'} keyboardColor={null} keyboardOnHover={null}/>
+        cols={20} x={-1} y={0.2} z={-1.5} rotateY={null} rotateX={null} textColor={'white'} backgroundColor={'grey'} keyboardColor={null} keyboardOnHover={null}/>
         <Text style={{transform: [{ translate: [0.1, 0.7 , -1.5]}]}}>{this.state.text}</Text>
       </View>
     );

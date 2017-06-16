@@ -30,9 +30,10 @@ npm install react-vr-textinput
     8. backgroundColor - color for the background of the input field
     9. keyboardColor - color for keys on keyboard
     10. keyboardOnHover - color for the keys when the mouse or vr controller hover over.
-    
-    If not specified, all props except onSubmit will use default values.
+    11. rotateX - provide the amount of rotate needed on the x axis as a number
+    12. rotateY - same as #11
   
+   If not specified, all props except onSubmit will use default values.
   - Click the TextBox Component to activate it.
   - When the user is finished, the keyboard will hide itself after the submit button has been pressed.
     
