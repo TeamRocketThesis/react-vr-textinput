@@ -17,7 +17,7 @@ npm install react-vr-textinput
 
 ## Usage
 
-> import TextInput from 'react-vr-textinput'
+> ``` import TextInput from 'react-vr-textinput' ```
 
   - Exposed Props
     1. onSubmit() - provide a call back function that will accept the text from the text input component
