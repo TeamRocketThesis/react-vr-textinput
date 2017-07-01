@@ -1,1 +1,1 @@
-module.exports = require('./src/TextInput');
+module.exports = require('./src/textInput');
