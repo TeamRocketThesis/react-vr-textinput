@@ -23,7 +23,7 @@ npm install react-vr-textinput
     1. onSubmit() - provide a call back function that will accept the text from the text input component
     2. rows - provide the number of lines you wish the text box to be
     3. cols - provide the number of columns you wish the tex box to be
-    4. x - coordinate for positioniong of all 3 elements (all related off the placement of the text input area)
+    4. x - coordinate for positioning of all 3 elements (all related off the placement of the text input area)
     5. y - coordinate for above
     6. z - coordinate for above
     7. textColor - color for the text inside the input field
@@ -32,7 +32,8 @@ npm install react-vr-textinput
     10. keyboardOnHover - color for the keys when the mouse or vr controller hover over.
     11. rotateX - provide the amount of rotate needed on the x axis as a number
     12. rotateY - same as #11
-  
+    13. defaultInput - provide a default string to be displayed on the input
+
    If not specified, all props except onSubmit will use default values.
   - Click the TextBox Component to activate it.
   - When the user is finished, the keyboard will hide itself after the submit button has been pressed.

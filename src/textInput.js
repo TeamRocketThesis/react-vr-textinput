@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, VrButton, StyleSheet, Text } from 'react-vr';
 import Keyboard from './keyboard';
 import Scroll from './scroll'
@@ -9,7 +10,7 @@ class TextInput extends Component {
     this.state = {
       start: 0,
       end: this.props.rows - 1,
-      displayArray: ['|'],
+      displayArray: [`${props.defaultInput}|`],
       text: '',
       rows: this.props.rows || 4,
       columns: this.props.cols || 50,
@@ -26,6 +27,12 @@ class TextInput extends Component {
       textColor: this.props.textColor || 'white',
       backgroundColor: this.props.backgroundColor || 'grey'
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      displayArray: [`${nextProps.defaultInput}|`]
+    })
   }
 
   calculateAdd(s) {
@@ -486,5 +493,13 @@ class TextInput extends Component {
       </View>);
   }
 }
+
+TextInput.propTypes = {
+  defaultInput: PropTypes.string
+};
+
+TextInput.defaultProps = {
+  defaultInput: ''
+};
 
 export default TextInput;
