@@ -1,16 +1,13 @@
-'use strict';
+const path = require('path');
+const blacklist = require('./node_modules/react-native/packager/blacklist');
 
-var path = require('path');
-var blacklist = require('./node_modules/react-native/packager/blacklist');
-
-var config = {
+const config = {
   getProjectRoots() {
     return getRoots();
   },
 
   getBlacklistRE() {
-    return blacklist([
-    ]);
+    return blacklist([]);
   },
 
   getAssetExts() {
@@ -27,7 +24,7 @@ var config = {
 };
 
 function getRoots() {
-  var root = process.env.REACT_NATIVE_APP_ROOT;
+  const root = process.env.REACT_NATIVE_APP_ROOT;
   if (root) {
     return [path.resolve(root)];
   }
